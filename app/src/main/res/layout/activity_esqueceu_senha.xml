@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".EsqueceuSenha">
 
     <TextView
         android:id="@+id/textView"
@@ -13,14 +13,15 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/work_sans_bold"
         android:gravity="center"
-        android:text="Entrar"
+        android:text="Definir Nova Senha"
+        android:textAlignment="center"
         android:textColor="#020617"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -38,60 +39,19 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.96" />
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/work_sans"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <EditText
-        android:id="@+id/editTextNumberPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:ems="0"
-        android:fontFamily="@font/work_sans"
-        android:hint="Senha"
-        android:inputType="numberPassword"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/work_sans_bold"
-        android:text="Esqueceu a Senha?"
-        android:textColor="#4894FE"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword" />
-
 
     <Button
         android:id="@+id/button3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="26dp"
         android:backgroundTint="#CDE5FF"
         android:fontFamily="@font/work_sans_bold"
-        android:text="Login"
+        android:text="Definir Nova Senha"
         android:textColor="#4894FE"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -114,6 +74,50 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.12" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/work_sans"
+        android:hint="Email"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/work_sans"
+        android:text="Forneça o email usado no cadastro. Você receberá instruções para definir uma nova senha."
+        android:textColor="#64748B"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeftArrow"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+        app:srcCompat="@drawable/left_arrow" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Register">
 
     <TextView
         android:id="@+id/textView"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/work_sans_bold"
         android:gravity="center"
-        android:text="Entrar"
+        android:text="Registrar"
         android:textColor="#020617"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -43,13 +43,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
         android:ems="10"
         android:fontFamily="@font/work_sans"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/editTextNumberPassword"
@@ -65,33 +66,19 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/work_sans_bold"
-        android:text="Esqueceu a Senha?"
-        android:textColor="#4894FE"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword" />
-
 
     <Button
         android:id="@+id/button3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="26dp"
         android:backgroundTint="#CDE5FF"
         android:fontFamily="@font/work_sans_bold"
-        android:text="Login"
+        android:text="Registrar"
         android:textColor="#4894FE"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -115,5 +102,47 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.12" />
 
+    <EditText
+        android:id="@+id/editTextText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/work_sans"
+        android:hint="Nome Completo"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/work_sans"
+        android:text="O nome deve corresponder ao que consta no RG."
+        android:textColor="#64748B"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRigth"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeftArrow"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+        app:srcCompat="@drawable/left_arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
