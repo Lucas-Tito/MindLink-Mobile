@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "637124568873",
+    "project_id": "mindlink-89f70",
+    "storage_bucket": "mindlink-89f70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637124568873:android:23b5de8ed2c924caecf938",
+        "android_client_info": {
+          "package_name": "com.titolucas.mindlink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637124568873-g80rkt77vhfdb177fsptp90j7fbvr07u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBagwAtspV_2GiXkaq3VsZx1S5C9dNPcRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637124568873-g80rkt77vhfdb177fsptp90j7fbvr07u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
