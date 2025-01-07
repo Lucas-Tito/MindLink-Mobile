@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/main"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".PerfilPsicologo">
 
     <Button
         android:id="@+id/seta_voltar"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/left_arrow"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="31dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -35,8 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/CircleImage"
-            />
+            app:shapeAppearanceOverlay="@style/CircleImage" />
 
 
         <TextView
@@ -72,7 +75,7 @@
 
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linearLayout_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -83,7 +86,7 @@
             tools:layout_editor_absoluteY="258dp">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imagem_perfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -120,27 +123,31 @@
         android:id="@+id/linha_horizontal"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginTop="16dp"
         android:background="#EAEAEA"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout_bio"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintWidth_percent="0.8" />
 
+
     <LinearLayout
-        android:id="@+id/linearLayout_bio"
+        android:id="@+id/linearLayout_meio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/calendario_psicologo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="323dp">
+        app:layout_constraintTop_toBottomOf="@+id/linha_horizontal"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/titulo_bio"
@@ -183,36 +190,41 @@
 
     </LinearLayout>
 
-
     <CalendarView
         android:id="@+id/calendario_psicologo"
-        android:layout_width="376dp"
-        android:layout_height="251dp"
+        android:layout_width="333dp"
+        android:layout_height="233dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="411dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linha_horizontal_calendario" />
 
     <TextView
         android:id="@+id/linha_horizontal_calendario"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginTop="16dp"
         android:background="#EAEAEA"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.8"
-        tools:layout_editor_absoluteY="671dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_meio"
+        app:layout_constraintWidth_percent="0.8" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linha_horizontal_calendario">
+        app:layout_constraintTop_toBottomOf="@+id/linha_horizontal_calendario"
+        app:layout_constraintVertical_bias="1.0">
 
         <Button
             android:layout_width="wrap_content"
@@ -222,32 +234,29 @@
             android:radius="6dp"
             android:text="09 : 11"
             android:textColor="#000000"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:backgroundTint="#EEEEEF"
             android:layout_marginLeft="10dp"
+            android:backgroundTint="#EEEEEF"
             android:radius="6dp"
             android:text="11 : 11"
             android:textColor="#000000"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:backgroundTint="#EEEEEF"
             android:layout_marginLeft="10dp"
+            android:backgroundTint="#EEEEEF"
             android:radius="6dp"
             android:text="17 : 11"
             android:textColor="#000000"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
     </LinearLayout>
 
 
