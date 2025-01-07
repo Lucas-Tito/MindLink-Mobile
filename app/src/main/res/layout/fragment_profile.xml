@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main">
+
+    <!-- Botão Voltar -->
+    <Button
+        android:id="@+id/seta_voltar"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/left_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Layout Central -->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Foto do Perfil -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/foto_perfil_psicologo"
+            android:layout_width="136dp"
+            android:layout_height="136dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sena"
+            app:shapeAppearanceOverlay="@style/CircleImage" />
+
+        <!-- Nome -->
+        <TextView
+            android:id="@+id/nome_perfil_psicologo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Ayrton Senna"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/titulo_perfil_psicologo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Psicólogo Infantil"
+            android:textSize="14sp"
+            android:textColor="#8696BB" />
+
+        <!-- Avaliações -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favorite_star" />
+
+            <TextView
+                android:id="@+id/avaliacoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="5.0"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/quantidade_avaliacoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="(250)"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Linha Horizontal -->
+    <View
+        android:id="@+id/linha_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#EAEAEA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bio -->
+    <LinearLayout
+        android:id="@+id/linearLayout_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linha_horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/titulo_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bio"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/descricao_perfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Descrição do perfil do psicólogo"
+            android:textSize="14sp"
+            android:textColor="#8696BB" />
+
+        <Button
+            android:id="@+id/lermais_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Ler Mais"
+            android:textColor="#4894FE"
+            android:textSize="14sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
