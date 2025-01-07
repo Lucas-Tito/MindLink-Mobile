@@ -2,7 +2,6 @@ package com.titolucas.mindlink.login.view
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,8 +11,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 
-import com.google.firebase.auth.FirebaseAuth
-import com.titolucas.mindlink.MainActivity
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.login.data.LoginResult
 import com.titolucas.mindlink.login.viewmodel.LoginViewModel
@@ -32,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login_deprecated)
 
         emailInput = findViewById(R.id.editTextEmail)
         passwordInput = findViewById(R.id.editTextPassword)
