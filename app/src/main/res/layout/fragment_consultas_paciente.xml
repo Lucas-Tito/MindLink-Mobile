@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConsultasAgendadasPaciente">
+
+    <LinearLayout
+        android:id="@+id/monthSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/work_sans_semibold"
+            android:text="Novembro"
+            android:textColor="#262626"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeftArrow"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+            app:srcCompat="@drawable/arrow_down_filled" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daySelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monthSelector">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="DOM"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="14"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="SEG"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="15"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="TER"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="16"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="QUA"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/appointment_day_selected_background"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="17"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="QUI"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="18"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="SEX"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="19"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="SAB"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/work_sans"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:text="20"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/work_sans_semibold"
+        android:text="Consultas"
+        android:textColor="#262626"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daySelector" />
+
+    <LinearLayout
+        android:id="@+id/appointmentCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:background="@drawable/appoint_card_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/work_sans_medium"
+            android:text="Ayrton Senna" />
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/work_sans"
+            android:text="24/08"
+            android:textSize="12sp" />
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/work_sans"
+            android:text="-"
+            android:textSize="12sp" />
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/work_sans"
+            android:text="9:30"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/more" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="-15dp"
+        android:background="@drawable/appointment_status_background"
+        android:fontFamily="@font/work_sans_medium"
+        android:padding="5dp"
+        android:text="Solicitada"
+        android:textColor="@color/white"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/appointmentCard"
+        app:layout_constraintStart_toStartOf="@+id/appointmentCard" />
+</androidx.constraintlayout.widget.ConstraintLayout>
