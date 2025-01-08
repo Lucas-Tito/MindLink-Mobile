@@ -32,10 +32,10 @@
             android:exported="true">
 
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
 
 
         </activity>
@@ -54,11 +54,11 @@
         <activity
             android:name=".login.view.LoginActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
@@ -74,17 +74,17 @@
             -->
         </activity>
 
-        <activity
-            android:name=".PerfilPaciente"
-            android:exported="true">
+<!--        <activity-->
+<!--            android:name=".PerfilPaciente"-->
+<!--            android:exported="true">-->
 
 
-<!--           <intent-filter>-->
-<!--               <action android:name="android.intent.action.MAIN" />-->
-<!--               <category android:name="android.intent.category.LAUNCHER" />-->
-<!--           </intent-filter>-->
+<!--&lt;!&ndash;           <intent-filter>&ndash;&gt;-->
+<!--&lt;!&ndash;               <action android:name="android.intent.action.MAIN" />&ndash;&gt;-->
+<!--&lt;!&ndash;               <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;-->
+<!--&lt;!&ndash;           </intent-filter>&ndash;&gt;-->
 
-        </activity>
+<!--        </activity>-->
 
         <meta-data
             android:name="preloaded_fonts"

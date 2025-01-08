@@ -1,6 +1,5 @@
 package com.titolucas.mindlink
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
 
                 R.id.home_nav -> changeView(HomeFragment())
-                R.id.calendar_nav -> changeView(CalendarFragment())
+                R.id.consultas_nav -> changeView(ConsultasPacienteFragment())
                 R.id.chat_nav -> changeView(ChatFragment())
                 R.id.profile_nav -> changeView(ProfileFragment())
 
