@@ -11,7 +11,7 @@ import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.titolucas.mindlink.profile.data.UserResponse
+import com.titolucas.mindlink.generalData.UserResponse
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -26,10 +26,9 @@ class ProfileActivity : AppCompatActivity() {
         if (userId != null) {
             viewModel.fetchUserById(userId)
         } else {
-            finish() // Fecha a atividade se não houver um usuário logado
+            finish()
         }
 
-        // Observa os dados do usuário
         viewModel.userDetails.observe(this) { user ->
             if (user.professionalType) {
                 setContentView(R.layout.activity_perfil_psicologo)

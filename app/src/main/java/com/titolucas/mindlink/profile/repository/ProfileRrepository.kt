@@ -2,7 +2,7 @@ package com.titolucas.mindlink.profile.repository
 
 
 import com.titolucas.mindlink.profile.data.UserRequest
-import com.titolucas.mindlink.profile.data.UserResponse
+import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.network.RetrofitInstance
 
 class ProfileRepository {
