@@ -16,6 +16,7 @@ import com.titolucas.mindlink.login.data.LoginResult
 import com.titolucas.mindlink.login.viewmodel.LoginViewModel
 import com.titolucas.mindlink.login.viewmodel.LoginViewModelFactory
 import com.titolucas.mindlink.profile.view.ProfileActivity
+import com.titolucas.mindlink.search.view.SearchActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailInput: EditText
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_deprecated)
+        setContentView(R.layout.activity_login)
 
         emailInput = findViewById(R.id.editTextEmail)
         passwordInput = findViewById(R.id.editTextPassword)
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
             when (result) {
                 is LoginResult.Success -> {
                     Toast.makeText(this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, ProfileActivity::class.java))
+                    startActivity(Intent(this, SearchActivity::class.java))
                     finish()
                 }
                 is LoginResult.Error -> {

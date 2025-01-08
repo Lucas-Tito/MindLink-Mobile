@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.titolucas.mindlink.profile.data.UserResponse
+import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.profile.repository.ProfileRepository
 import kotlinx.coroutines.launch
 

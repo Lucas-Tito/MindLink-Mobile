@@ -11,7 +11,7 @@ import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.titolucas.mindlink.profile.data.UserResponse
+import com.titolucas.mindlink.generalData.UserResponse
 
 class ProfileActivity : AppCompatActivity() {
 
