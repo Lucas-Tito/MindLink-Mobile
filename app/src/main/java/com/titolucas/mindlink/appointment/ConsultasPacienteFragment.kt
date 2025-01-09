@@ -1,10 +1,13 @@
-package com.titolucas.mindlink
+package com.titolucas.mindlink.appointment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.titolucas.mindlink.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +29,15 @@ class ConsultasPacienteFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+
+        // Formato da data para exibição
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+
+        // Utilizando o array de consultas mockadas
+        consultasMockadas.forEach { consulta ->
+            val dataHoraFormatada = dateFormat.format(consulta.dataHora)
+            println("Consulta: ${consulta.nomePsico}, Status: ${consulta.status}, Data/Hora: $dataHoraFormatada")
         }
     }
 

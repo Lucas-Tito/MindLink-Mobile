@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.titolucas.mindlink.appointment.ConsultasPacienteFragment
 import com.titolucas.mindlink.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
