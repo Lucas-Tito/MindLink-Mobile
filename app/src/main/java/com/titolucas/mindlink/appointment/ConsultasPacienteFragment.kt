@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.appointment
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,6 +73,16 @@ class ConsultasPacienteFragment : Fragment() {
             statusTextView.text = consulta.status
             dataTextView.text = dateFormat.format(consulta.dataHora)
             horaTextView.text = timeFormat.format(consulta.dataHora)
+
+            // Obter o background do TextView como GradientDrawable
+            val backgroundDrawable = statusTextView.background as? GradientDrawable
+
+            // Define a cor do background com base no status
+            when (consulta.status) {
+                "Cancelada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_cancelado, null))
+                "Agendada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_agendado, null))
+                "Solicitada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_solicitado, null))
+            }
 
             // Adicione o card ao contêiner
             container.addView(card)

@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="status_cancelado">#FFABAB</color> <!-- Vermelho -->
+    <color name="status_agendado">#C6FFA3</color> <!-- Verde -->
+    <color name="status_solicitado">#262626</color> <!-- Preto -->
 </resources>

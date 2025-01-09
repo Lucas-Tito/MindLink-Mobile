@@ -25,7 +25,7 @@ private fun createDate(year: Int, month: Int, day: Int, hour: Int, minute: Int):
 // Array de consultas mockadas
 val consultasMockadas = arrayOf(
     Consulta("João Silva", "Agendada", createDate(2025, 1, 10, 14, 0)),
-    Consulta("Maria Oliveira", "Concluída", createDate(2025, 1, 5, 9, 30)),
+    Consulta("Maria Oliveira", "Solicitada", createDate(2025, 1, 5, 9, 30)),
     Consulta("Carlos Santos", "Cancelada", createDate(2025, 1, 7, 16, 0)),
     Consulta("Ana Costa", "Agendada", createDate(2025, 1, 12, 11, 15))
 )
