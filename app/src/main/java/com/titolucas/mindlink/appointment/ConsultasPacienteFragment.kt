@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.titolucas.mindlink.R
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -34,6 +36,7 @@ class ConsultasPacienteFragment : Fragment() {
         // Formato da data para exibição
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
+
         // Utilizando o array de consultas mockadas
         consultasMockadas.forEach { consulta ->
             val dataHoraFormatada = dateFormat.format(consulta.dataHora)
@@ -48,6 +51,33 @@ class ConsultasPacienteFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_consultas_paciente, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val container = view.findViewById<LinearLayout>(R.id.consultas_container)
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+        consultasMockadas.forEach { consulta ->
+            val card = LayoutInflater.from(context).inflate(R.layout.consulta_card, container, false)
+
+            // Configure o card com os dados da consulta
+            val nomePsicoTextView = card.findViewById<TextView>(R.id.nome_psico)
+            val statusTextView = card.findViewById<TextView>(R.id.status_consulta)
+            val dataTextView = card.findViewById<TextView>(R.id.data_consulta)
+            val horaTextView = card.findViewById<TextView>(R.id.hora_consulta)
+
+            nomePsicoTextView.text = consulta.nomePsico
+            statusTextView.text = consulta.status
+            dataTextView.text = dateFormat.format(consulta.dataHora)
+            horaTextView.text = timeFormat.format(consulta.dataHora)
+
+            // Adicione o card ao contêiner
+            container.addView(card)
+        }
+    }
+
 
     companion object {
         /**

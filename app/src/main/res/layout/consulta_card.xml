@@ -24,7 +24,7 @@
 
         <!-- Nome do Psicólogo -->
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/nome_psico"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/work_sans_medium"
@@ -37,7 +37,7 @@
 
         <!-- Data da Consulta -->
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/data_consulta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/work_sans"
@@ -55,7 +55,7 @@
 
         <!-- Hora da Consulta -->
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/hora_consulta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/work_sans"
@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/status_consulta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
