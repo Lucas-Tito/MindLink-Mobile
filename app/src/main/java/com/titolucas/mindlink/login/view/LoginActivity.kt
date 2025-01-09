@@ -17,6 +17,7 @@ import com.titolucas.mindlink.login.viewmodel.LoginViewModel
 import com.titolucas.mindlink.login.viewmodel.LoginViewModelFactory
 import com.titolucas.mindlink.profile.view.ProfileActivity
 import com.titolucas.mindlink.search.view.SearchActivity
+import com.titolucas.mindlink.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailInput: EditText
@@ -56,7 +57,8 @@ class LoginActivity : AppCompatActivity() {
             when (result) {
                 is LoginResult.Success -> {
                     Toast.makeText(this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SearchActivity::class.java))
+//                    startActivity(Intent(this, SearchActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
                 is LoginResult.Error -> {

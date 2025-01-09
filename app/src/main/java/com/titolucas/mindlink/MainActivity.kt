@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         changeView(HomeFragment())
 
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -26,25 +29,34 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener {
 
+            //userID que será mandado para todos os fragments
+            val args = Bundle().apply {
+                putString("USER_ID", userId)
+            }
+
             when(it.itemId){
 
-                R.id.home_nav -> changeView(HomeFragment())
-                R.id.consultas_nav -> changeView(ConsultasPacienteFragment())
-                R.id.chat_nav -> changeView(ChatFragment())
-                R.id.profile_nav -> changeView(ProfileFragment())
+                R.id.home_nav -> changeView(HomeFragment(), args)
+                R.id.consultas_nav -> changeView(ConsultasPacienteFragment(), args)
+                R.id.chat_nav -> changeView(ChatFragment(), args)
+                R.id.profile_nav -> changeView(ProfileFragment(), args)
 
-                else ->{
-
-                }
+                else ->{}
             }
             true
         }
     }
 
-    private fun changeView(fragment : Fragment){
+    private fun changeView(fragment : Fragment, args: Bundle? = null){
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+
+        // Adicione os argumentos ao Fragment, se houver
+        if (args != null) {
+            fragment.arguments = args
+        }
+
         fragmentTransaction.replace(R.id.main_frame_layout, fragment)
         fragmentTransaction.commit()
 
