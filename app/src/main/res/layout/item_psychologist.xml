@@ -3,29 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="12dp"
+    android:background="#FFFFFF"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
 
-    <TextView
-        android:id="@+id/psychologist_name"
+    <!-- Linha contendo a imagem e as informações -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Imagem do Psicólogo -->
+        <ImageView
+            android:id="@+id/psychologist_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_profile"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Informações do Psicólogo -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <!-- Nome -->
+            <TextView
+                android:id="@+id/psychologist_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dr. Psicólogo"
+                android:fontFamily="@font/work_sans_bold"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Especialidade e Classificação -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Especialidade -->
+                <TextView
+                    android:id="@+id/psychologist_specialty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Psicólogo Infantil"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/work_sans_medium"
+                    android:textColor="#666666"
+                    android:layout_alignParentStart="true" />
+
+                <!-- Classificação -->
+                <TextView
+                    android:id="@+id/psychologist_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="★ 5.0"
+                    android:textSize="14sp"
+                    android:textColor="#FFD700"
+                    android:fontFamily="@font/work_sans_semibold"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Botão de Agendamento -->
+    <Button
+        android:id="@+id/schedule_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome do Psicólogo"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/psychologist_specialty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Especialidade"
-        android:textSize="16sp"
-        android:textColor="#666666" />
-
-    <TextView
-        android:id="@+id/psychologist_rating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5.0"
+        android:text="Agendar Consulta"
         android:textSize="14sp"
-        android:textColor="#FFD700" />
+        android:padding="12dp"
+        android:fontFamily="@font/work_sans_semibold"
+        android:backgroundTint="#dae5f7"
+        android:textColor="#4e8cf2"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

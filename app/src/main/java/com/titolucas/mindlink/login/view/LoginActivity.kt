@@ -2,7 +2,6 @@ package com.titolucas.mindlink.login.view
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,12 +11,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 
-import com.google.firebase.auth.FirebaseAuth
-import com.titolucas.mindlink.MainActivity
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.login.data.LoginResult
 import com.titolucas.mindlink.login.viewmodel.LoginViewModel
 import com.titolucas.mindlink.login.viewmodel.LoginViewModelFactory
+import com.titolucas.mindlink.profile.view.ProfileActivity
+import com.titolucas.mindlink.search.view.SearchActivity
+import com.titolucas.mindlink.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailInput: EditText
@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
     private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory() // Crie um factory se necessário para passar o repositório
+        LoginViewModelFactory()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
             when (result) {
                 is LoginResult.Success -> {
                     Toast.makeText(this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
+//                    startActivity(Intent(this, SearchActivity::class.java))
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
