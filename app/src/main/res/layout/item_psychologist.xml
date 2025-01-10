@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/psychologist_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome do Psicólogo"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/psychologist_specialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Especialidade"
+        android:textSize="16sp"
+        android:textColor="#666666" />
+
+    <TextView
+        android:id="@+id/psychologist_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="5.0"
+        android:textSize="14sp"
+        android:textColor="#FFD700" />
+</LinearLayout>
