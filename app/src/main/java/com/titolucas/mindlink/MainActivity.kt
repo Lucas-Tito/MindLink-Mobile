@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment
 import com.titolucas.mindlink.databinding.ActivityMainBinding
 import com.titolucas.mindlink.home.view.HomeFragment
+import com.titolucas.mindlink.profile.view.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Substituindo o HomeFragment antigo pelo novo
         changeView(HomeFragment())
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        // Adicione os argumentos ao Fragment, se houver
         if (args != null) {
             fragment.arguments = args
         }

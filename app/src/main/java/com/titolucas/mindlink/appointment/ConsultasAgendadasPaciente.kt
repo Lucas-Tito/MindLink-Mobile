@@ -1,10 +1,11 @@
-package com.titolucas.mindlink
+package com.titolucas.mindlink.appointment
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.titolucas.mindlink.R
 import com.titolucas.mindlink.appointment.consultasMockadas
 import java.text.SimpleDateFormat
 import java.util.Locale

@@ -9,6 +9,7 @@ data class UserResponse(
     val professionalType: Boolean,
     val photoURL: String?,
     val password: String? = null,
+    val education: String?= null,
     val bio: String?
 
 )
