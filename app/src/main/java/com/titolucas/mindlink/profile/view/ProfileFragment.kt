@@ -4,18 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.profile.repository.ProfileRepository
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
-import com.google.android.material.imageview.ShapeableImageView
-import android.widget.TextView
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
@@ -23,52 +23,52 @@ class ProfileFragment : Fragment() {
         ProfileViewModelFactory(ProfileRepository())
     }
 
-    private var isProfessional: Boolean = false
     private lateinit var user: UserResponse
+    private var isProfessional: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId == null) {
-            Toast.makeText(requireContext(), "Usuário não autenticado", Toast.LENGTH_SHORT).show()
-            requireActivity().finish()
-            return null
-        }
-
-
-        viewModel.fetchUserById(userId)
-        return null
+        return inflater.inflate(R.layout.activity_perfil_paciente, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observar as informações do usuário e configurar a interface
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            Toast.makeText(requireContext(), "Usuário não autenticado", Toast.LENGTH_SHORT).show()
+            requireActivity().finish()
+            return
+        }
+
+        viewModel.fetchUserById(userId)
+
         viewModel.userDetails.observe(viewLifecycleOwner) { fetchedUser ->
-            user = fetchedUser
-            isProfessional = user.professionalType
+            if (fetchedUser != null) {
+                user = fetchedUser
+                isProfessional = user.professionalType
 
-            // Inflar o layout correspondente
-            //val layoutId = if (isProfessional) {
-                //R.layout.activity_perfil_psicologo
-            //} else {
-            var layoutId= R.layout.activity_perfil_paciente
-           // }
+                // Atualiza o layout baseado no tipo do usuário
+                val parent = view.parent as ViewGroup
+                val layoutId = if (isProfessional) {
+                    R.layout.activity_perfil_psicologo
+                } else {
+                    R.layout.activity_perfil_paciente
+                }
 
+                parent.removeAllViews()
+                val newView = layoutInflater.inflate(layoutId, parent, false)
+                parent.addView(newView)
 
-            val viewGroup = view.parent as ViewGroup
-            val newView = layoutInflater.inflate(layoutId, viewGroup, false)
-            viewGroup.removeAllViews()
-            viewGroup.addView(newView)
-
-
-            if (isProfessional) {
-                setupProfessionalView(newView, user)
+                if (isProfessional) {
+                    setupProfessionalView(newView, user)
+                } else {
+                    setupPatientView(newView, user)
+                }
             } else {
-                setupPatientView(newView, user)
+                Toast.makeText(requireContext(), "Erro ao carregar o perfil do usuário", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -93,7 +93,7 @@ class ProfileFragment : Fragment() {
 
         profileName.text = user.name
         bioText.text = user.bio ?: "Nenhuma bio disponível"
-        education.text = user.education
+        education.text = user.education ?: "Sem informações de educação"
         Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
     }
 }
