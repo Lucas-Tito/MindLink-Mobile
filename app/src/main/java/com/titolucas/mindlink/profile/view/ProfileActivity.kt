@@ -10,7 +10,6 @@ import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
 import com.google.android.material.imageview.ShapeableImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.generalData.UserResponse
 
@@ -34,10 +33,10 @@ class ProfileActivity : AppCompatActivity() {
         viewModel.userDetails.observe(this) { user ->
             println("User from backend: "+ user.toString())
             if (user.professionalType) {
-                setContentView(R.layout.activity_perfil_psicologo)
+                setContentView(R.layout.activity_perfil_agendamento)
                 setupProfessionalView(user)
             } else {
-                setContentView(R.layout.activity_perfil_paciente)
+                setContentView(R.layout.activity_perfil_pessoal_paciente)
                 setupPatientView(user)
             }
         }

@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_perfil_paciente, container, false)
+        return inflater.inflate(R.layout.activity_perfil_pessoal_paciente, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,9 +53,9 @@ class ProfileFragment : Fragment() {
                 // Atualiza o layout baseado no tipo do usuário
                 val parent = view.parent as ViewGroup
                 val layoutId = if (isProfessional) {
-                    R.layout.activity_perfil_psicologo
+                    R.layout.activity_perfil_agendamento
                 } else {
-                    R.layout.activity_perfil_paciente
+                    R.layout.activity_perfil_pessoal_paciente
                 }
 
                 parent.removeAllViews()
