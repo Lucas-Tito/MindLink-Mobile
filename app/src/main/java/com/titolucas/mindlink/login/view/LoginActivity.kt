@@ -9,15 +9,20 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.login.data.LoginResult
 import com.titolucas.mindlink.login.viewmodel.LoginViewModel
+import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.login.viewmodel.LoginViewModelFactory
 import com.titolucas.mindlink.profile.view.ProfileActivity
 import com.titolucas.mindlink.search.view.SearchActivity
 import com.titolucas.mindlink.MainActivity
+import com.titolucas.mindlink.MainPsycho
+import com.titolucas.mindlink.profile.repository.ProfileRepository
+import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailInput: EditText
@@ -28,6 +33,11 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel: LoginViewModel by viewModels {
         LoginViewModelFactory()
     }
+    private val profileViewModel: ProfileViewModel by viewModels{
+        ProfileViewModelFactory(ProfileRepository())
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +68,14 @@ class LoginActivity : AppCompatActivity() {
                 is LoginResult.Success -> {
                     Toast.makeText(this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
 //                    startActivity(Intent(this, SearchActivity::class.java))
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    // Obter o userId diretamente do FirebaseAuth
+                    val userId = FirebaseAuth.getInstance().currentUser?.uid
+                    if (userId != null) {
+                        // Buscar o tipo de usuário
+                        fetchUserTypeAndNavigate(userId)
+                    } else {
+                        Toast.makeText(this, "Erro ao obter o ID do usuário", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 is LoginResult.Error -> {
                     Toast.makeText(this, "Erro: ${result.message}", Toast.LENGTH_SHORT).show()
@@ -67,6 +83,30 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+    private fun fetchUserTypeAndNavigate(userId: String) {
+        // Busca os detalhes do usuário no ViewModel
+        profileViewModel.fetchUserById(userId)
+
+        profileViewModel.userDetails.observe(this) { fetchedUser ->
+            if (fetchedUser != null) {
+                val isProfessional = fetchedUser.professionalType
+
+                // Navega para a tela correta
+                if (isProfessional) {
+                    startActivity(Intent(this, MainPsycho::class.java))
+                } else {
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+                finish()
+            } else {
+                Toast.makeText(this, "Erro ao carregar o perfil do usuário", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
+
 
     private fun validateInputs(email: String, password: String): Boolean {
         return when {
