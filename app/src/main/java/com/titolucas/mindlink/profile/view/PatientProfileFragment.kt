@@ -50,50 +50,20 @@ class PatientProfileFragment : Fragment() {
                 user = fetchedUser
                 isProfessional = user.professionalType
 
-                // Atualiza o layout baseado no tipo do usuário
-                val parent = view.parent as ViewGroup
-                val layoutId = if (isProfessional) {
-                    R.layout.activity_perfil_agendamento
-                } else {
-                    R.layout.activity_perfil_pessoal_paciente
-                }
+                val profileImage = view.findViewById<ShapeableImageView>(R.id.foto_perfil_paciente)
+                val profileName = view.findViewById<TextView>(R.id.nome_perfil_paciente)
+                val education = view.findViewById<TextView>(R.id.education_paciente)
+                val bioText = view.findViewById<TextView>(R.id.bio_paciente)
 
-                parent.removeAllViews()
-                val newView = layoutInflater.inflate(layoutId, parent, false)
-                parent.addView(newView)
+                profileName.text = user.name
+                bioText.text = user.bio ?: "Nenhuma bio disponível"
+                education.text = user.education ?: "Sem informações de educação"
+                Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
 
-                if (isProfessional) {
-                    setupProfessionalView(newView, user)
-                } else {
-                    setupPatientView(newView, user)
-                }
+
             } else {
                 Toast.makeText(requireContext(), "Erro ao carregar o perfil do usuário", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun setupProfessionalView(view: View, user: UserResponse) {
-        val profileImage = view.findViewById<ShapeableImageView>(R.id.foto_perfil_psicologo)
-        val profileName = view.findViewById<TextView>(R.id.nome_perfil_psicologo)
-        val profileTitle = view.findViewById<TextView>(R.id.titulo_perfil_psicologo)
-        val bioText = view.findViewById<TextView>(R.id.descricao_perfil)
-
-        profileName.text = user.name
-        profileTitle.text = "Psicólogo"
-        bioText.text = user.bio ?: "Bio não disponível"
-        Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
-    }
-
-    private fun setupPatientView(view: View, user: UserResponse) {
-        val profileImage = view.findViewById<ShapeableImageView>(R.id.foto_perfil_paciente)
-        val profileName = view.findViewById<TextView>(R.id.nome_perfil_paciente)
-        val education = view.findViewById<TextView>(R.id.education_paciente)
-        val bioText = view.findViewById<TextView>(R.id.bio_paciente)
-
-        profileName.text = user.name
-        bioText.text = user.bio ?: "Nenhuma bio disponível"
-        education.text = user.education ?: "Sem informações de educação"
-        Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
     }
 }

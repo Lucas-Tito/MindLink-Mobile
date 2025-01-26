@@ -12,6 +12,7 @@ import com.titolucas.mindlink.appointment.ConsultasPacienteFragment;
 import com.titolucas.mindlink.databinding.ActivityMainPsychoBinding;
 import com.titolucas.mindlink.home.view.HomeFragment;
 import com.titolucas.mindlink.profile.view.PatientProfileFragment;
+import com.titolucas.mindlink.profile.view.PsychoProfileFragment;
 
 public class MainPsycho extends AppCompatActivity {
 
@@ -50,7 +51,7 @@ public class MainPsycho extends AppCompatActivity {
             } else if (itemId == R.id.chat_nav) {
                 changeView(new ChatFragment(), args);
             } else if (itemId == R.id.profile_nav) {
-                changeView(new PatientProfileFragment(), args);
+                changeView(new PsychoProfileFragment(), args);
             }
             return true;
         });
