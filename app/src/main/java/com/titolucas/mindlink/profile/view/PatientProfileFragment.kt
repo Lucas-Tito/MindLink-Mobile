@@ -17,7 +17,7 @@ import com.titolucas.mindlink.profile.repository.ProfileRepository
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
 
-class ProfileFragment : Fragment() {
+class PatientProfileFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by viewModels {
         ProfileViewModelFactory(ProfileRepository())

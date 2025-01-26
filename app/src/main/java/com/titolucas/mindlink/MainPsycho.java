@@ -1,9 +1,7 @@
 package com.titolucas.mindlink;
 
-import static java.sql.DriverManager.println;
-
 import android.os.Bundle;
-import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
@@ -13,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment;
 import com.titolucas.mindlink.databinding.ActivityMainPsychoBinding;
 import com.titolucas.mindlink.home.view.HomeFragment;
-import com.titolucas.mindlink.profile.view.ProfileFragment;
+import com.titolucas.mindlink.profile.view.PatientProfileFragment;
 
 public class MainPsycho extends AppCompatActivity {
 
@@ -52,7 +50,7 @@ public class MainPsycho extends AppCompatActivity {
             } else if (itemId == R.id.chat_nav) {
                 changeView(new ChatFragment(), args);
             } else if (itemId == R.id.profile_nav) {
-                changeView(new ProfileFragment(), args);
+                changeView(new PatientProfileFragment(), args);
             }
             return true;
         });

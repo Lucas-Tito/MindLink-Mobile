@@ -11,8 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment
 import com.titolucas.mindlink.databinding.ActivityMainBinding
 import com.titolucas.mindlink.home.view.HomeFragment
-import com.titolucas.mindlink.profile.view.ProfileFragment
-import java.sql.DriverManager
+import com.titolucas.mindlink.profile.view.PatientProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home_nav -> changeView(HomeFragment(), args)
                 R.id.consultas_nav -> changeView(ConsultasPacienteFragment(), args)
                 R.id.chat_nav -> changeView(ChatFragment(), args)
-                R.id.profile_nav -> changeView(ProfileFragment(), args)
+                R.id.profile_nav -> changeView(PatientProfileFragment(), args)
                 else -> {}
             }
             true
