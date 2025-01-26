@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.search.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,11 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             nameText.text = user.name
             bioText.text = user.bio ?: "Sem descrição"
             Glide.with(itemView.context).load(user.photoURL).into(profileImage)
+
+            //COMECEI A FAZER O ONCLICK PRA IR PRO CALENDARIO DE AGENDAMENTO
+            itemView.setOnClickListener {
+                Log.i("", "Clicou em um dos psicólogos")
+            }
         }
     }
 }
