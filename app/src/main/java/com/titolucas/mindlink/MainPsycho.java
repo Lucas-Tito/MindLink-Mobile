@@ -1,5 +1,7 @@
 package com.titolucas.mindlink;
 
+import static java.sql.DriverManager.println;
+
 import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -24,7 +26,7 @@ public class MainPsycho extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         changeView(new HomeFragment(),null);
-
+        System.out.println("Entrou no fluxo do psicólogo");
         String userId = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid()
                 : null;

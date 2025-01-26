@@ -1,6 +1,7 @@
 package com.titolucas.mindlink
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +12,7 @@ import com.titolucas.mindlink.appointment.ConsultasPacienteFragment
 import com.titolucas.mindlink.databinding.ActivityMainBinding
 import com.titolucas.mindlink.home.view.HomeFragment
 import com.titolucas.mindlink.profile.view.ProfileFragment
+import java.sql.DriverManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         changeView(HomeFragment())
+        Log.i("", "Entrou no fluxo do paciente")
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 

@@ -34,15 +34,7 @@ class ConsultasPacienteFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        // Formato da data para exibição
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
-
-        // Utilizando o array de consultas mockadas
-        consultasMockadas.forEach { consulta ->
-            val dataHoraFormatada = dateFormat.format(consulta.dataHora)
-            println("Consulta: ${consulta.nomePsico}, Status: ${consulta.status}, Data/Hora: $dataHoraFormatada")
-        }
     }
 
     override fun onCreateView(
