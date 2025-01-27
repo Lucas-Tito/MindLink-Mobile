@@ -10,6 +10,7 @@ data class UserResponse(
     val photoURL: String?,
     val password: String? = null,
     val education: String?= null,
-    val bio: String?
+    val bio: String?,
+    val rating:Double? = null
 
 )
