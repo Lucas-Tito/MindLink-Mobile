@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".profile.view.ProfileFragment">
+
+
+    <!--Foto de Perfil-->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/picture_profile_psychologist"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/CircleImage"
+        tools:src="@drawable/sena" />
+
+
+    <TextView
+        android:id="@+id/name_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text=" Ayrton Senna,"
+        android:textSize="17sp"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"/>
+
+    <!-- editar  -->
+    <TextView
+        android:id="@+id/tvEditarPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Editar Perfil"
+        android:textColor="#FD8F40"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-medium"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="editarPerfil" />
+
+    <!--bio -->
+    <TextView
+        android:id="@+id/bio_psichologist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="4dp"
+        android:padding="6dp"
+        android:text="Com experiência em acolhimento e terapia, ajuda a galera a superar barreiras e
+         encontrar equilíbrio emocional no dia a dia"
+        android:textSize="15sp"
+        android:textColor="#616161"
+        android:gravity="center"/>
+
+
+    <!--TITULO -->
+    <LinearLayout
+        android:id="@+id/boxTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/textview_border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="Titulo"
+            android:textSize="12sp"
+            android:textColor="#616161" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="Psicólogo Social"
+            android:textSize="16sp"
+            android:textColor="#616161" />
+
+    </LinearLayout>
+
+    <!-- Educação -->
+    <LinearLayout
+        android:id="@+id/boxEducation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/textview_border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleEducation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="Educação"
+            android:textSize="12sp"
+            android:textColor="#616161" />
+
+        <TextView
+            android:id="@+id/education_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="Universidade Federal do Ceará"
+            android:textSize="16sp"
+            android:textColor="#616161" />
+
+    </LinearLayout>
+
+    <!-- Email -->
+    <LinearLayout
+        android:id="@+id/boxEmal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/textview_border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="Email"
+            android:textSize="12sp"
+            android:textColor="#616161" />
+
+        <TextView
+            android:id="@+id/Email_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="sena231@gmail.com"
+            android:textSize="16sp"
+            android:textColor="#616161" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

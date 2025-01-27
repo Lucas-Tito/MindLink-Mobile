@@ -12,3 +12,4 @@ class ProfileViewModelFactory(private val repository: ProfileRepository) : ViewM
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+//implementao acesso ao repositorio(as apis)

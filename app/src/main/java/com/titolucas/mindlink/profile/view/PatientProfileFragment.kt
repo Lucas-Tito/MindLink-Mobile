@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.profile.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,7 @@ class PatientProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_perfil_pessoal_paciente, container, false)
+        return inflater.inflate(R.layout.activity_profile_pyschologist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,18 +51,32 @@ class PatientProfileFragment : Fragment() {
                 user = fetchedUser
                 isProfessional = user.professionalType
 
-                val profileImage = view.findViewById<ShapeableImageView>(R.id.foto_perfil_paciente)
-                val profileName = view.findViewById<TextView>(R.id.nome_perfil_paciente)
-                val education = view.findViewById<TextView>(R.id.education_paciente)
-                val bioText = view.findViewById<TextView>(R.id.bio_paciente)
+                // Atualiza o layout baseado no tipo do usuário
+                val parent = view.parent as ViewGroup
+                val layoutId = R.layout.activity_profile_patient
+
+
+                parent.removeAllViews()
+                val newView = layoutInflater.inflate(layoutId, parent, false)
+                parent.addView(newView)
+
+                val profileImage = newView.findViewById<ShapeableImageView>(R.id.picture_profile_patient)
+                val profileName = newView.findViewById<TextView>(R.id.name_profile_patient)
+                val bioText = newView.findViewById<TextView>(R.id.bio_patient)
+                val editProfileButton = newView.findViewById<TextView>(R.id.tvEditarPerfil)
 
                 profileName.text = user.name
                 bioText.text = user.bio ?: "Nenhuma bio disponível"
-                education.text = user.education ?: "Sem informações de educação"
                 Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
 
+                //      Configurar o clique no botão "Editar Perfil"
+                editProfileButton.setOnClickListener {
+                    val intent = Intent(requireContext(), ProfileEditActivity::class.java)
+                    startActivity(intent)
+                }
 
-            } else {
+            }
+            else {
                 Toast.makeText(requireContext(), "Erro ao carregar o perfil do usuário", Toast.LENGTH_SHORT).show()
             }
         }
