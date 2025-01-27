@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -23,7 +25,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_search_result, parent, false)
+            .inflate(R.layout.item_psychologist, parent, false)
         return SearchViewHolder(view)
     }
 
@@ -33,19 +35,25 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun getItemCount(): Int = data.size
 
-    class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val profileImage: ShapeableImageView = itemView.findViewById(R.id.profile_image)
-        private val nameText: TextView = itemView.findViewById(R.id.name_text)
-        private val bioText: TextView = itemView.findViewById(R.id.bio_text)
+    inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val profileImage: ImageView = itemView.findViewById(R.id.psychologist_image)
+        private val nameText: TextView = itemView.findViewById(R.id.psychologist_name)
+        private val specialtyText: TextView = itemView.findViewById(R.id.psychologist_specialty)
+        private val ratingText: TextView = itemView.findViewById(R.id.psychologist_rating)
+        private val scheduleButton: Button = itemView.findViewById(R.id.schedule_button)
 
         fun bind(user: UserResponse) {
             nameText.text = user.name
-            bioText.text = user.bio ?: "Sem descrição"
-            Glide.with(itemView.context).load(user.photoURL).into(profileImage)
+            specialtyText.text = user.bio ?: "Especialidade não informada"
+            ratingText.text = "★ ${user.rating ?: "N/A"}"
 
-            //COMECEI A FAZER O ONCLICK PRA IR PRO CALENDARIO DE AGENDAMENTO
-            itemView.setOnClickListener {
-                Log.i("", "Clicou em um dos psicólogos")
+            Glide.with(itemView.context)
+                .load(user.photoURL)
+                .placeholder(R.drawable.ic_user_placeholder)
+                .into(profileImage)
+
+            scheduleButton.setOnClickListener {
+                //onScheduleClick(user)
             }
         }
     }
