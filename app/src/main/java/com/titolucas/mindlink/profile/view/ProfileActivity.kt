@@ -33,10 +33,10 @@ class ProfileActivity : AppCompatActivity() {
         viewModel.userDetails.observe(this) { user ->
             println("User from backend: "+ user.toString())
             if (user.professionalType) {
-                setContentView(R.layout.activity_perfil_agendamento)
+                setContentView(R.layout.activity_profile_pyschologist)
                 setupProfessionalView(user)
             } else {
-                setContentView(R.layout.activity_perfil_pessoal_paciente)
+                setContentView(R.layout.activity_profile_patient)
                 setupPatientView(user)
             }
         }
@@ -54,15 +54,15 @@ class ProfileActivity : AppCompatActivity() {
         Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
     }
 
-    private fun setupPatientView(user: UserResponse) {
-        val profileImage = findViewById<ShapeableImageView>(R.id.foto_perfil_paciente)
-        val profileName = findViewById<TextView>(R.id.nome_perfil_paciente)
-        val education = findViewById<TextView>(R.id.education_paciente)
-        val bioText = findViewById<TextView>(R.id.bio_paciente)
+    private fun setupPatientView(user: UserResponse){
+        val profileImage = findViewById<ShapeableImageView>(R.id.picture_profile_patient)
+        val profileName = findViewById<TextView>(R.id.name_profile_patient)
+        val bioText = findViewById<TextView>(R.id.bio_patient)
+        val titleText = findViewById<TextView>(R.id.titleNameText)
 
+        titleText.text = user.title
         profileName.text = user.name
         bioText.text = user.bio ?: "Nenhuma bio disponível"
-        education.text = user.education
         Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
     }
 }
