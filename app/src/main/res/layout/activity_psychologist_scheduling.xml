@@ -134,8 +134,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout_meio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="129dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
@@ -144,10 +144,10 @@
         android:paddingRight="16dp"
         app:layout_constraintBottom_toTopOf="@+id/calendario_psicologo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linha_horizontal"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.083">
 
         <TextView
             android:id="@+id/titulo_bio"
@@ -164,7 +164,7 @@
 
         <TextView
             android:id="@+id/descricao_perfil"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/work_sans"
@@ -177,28 +177,33 @@
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="383dp" />
 
-        <Button
-            android:id="@+id/lermais_descricao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:text="Ler Mais"
-            android:textColor="#4894FE"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+<!--        <Button-->
+<!--            android:id="@+id/lermais_descricao"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="right"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:text="Ler Mais"-->
+<!--            android:textColor="#4894FE"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textStyle="normal" />-->
 
     </LinearLayout>
 
-    <CalendarView
-        android:id="@+id/calendario_psicologo"
-        android:layout_width="333dp"
-        android:layout_height="233dp"
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendar_psychologist_custom"
+        android:layout_width="408dp"
+        android:layout_height="322dp"
         android:layout_marginTop="16dp"
+        app:headerColor="#40ABD7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linha_horizontal_calendario" />
+        app:layout_constraintTop_toBottomOf="@+id/linha_horizontal_calendario"
+        app:selectionColor="#2196F3"
+        app:type="one_day_picker" />
+
+
 
     <TextView
         android:id="@+id/linha_horizontal_calendario"
@@ -224,40 +229,27 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linha_horizontal_calendario"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:backgroundTint="#EEEEEF"
-            android:radius="6dp"
-            android:text="09 : 11"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:fadeScrollbars="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_psychologist_custom"
+        app:layout_constraintVertical_bias="0.29">
 
-        <Button
+        <LinearLayout
+            android:id="@+id/horarios_container"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:backgroundTint="#EEEEEF"
-            android:radius="6dp"
-            android:text="11 : 11"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:backgroundTint="#EEEEEF"
-            android:radius="6dp"
-            android:text="17 : 11"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center" />
+    </HorizontalScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

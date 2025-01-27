@@ -7,4 +7,8 @@
     <color name="status_agendado">#C6FFA3</color> <!-- Verde -->
     <color name="status_solicitado">#262626</color> <!-- Preto -->
 
+    <color name="horários_disponives">#0AA41F</color> <!-- Verde escuro-->
+    <color name="horarios_dia">#EEEEEF</color> <!-- Verde escuro-->
+
+
 </resources>
