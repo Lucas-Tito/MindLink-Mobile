@@ -31,7 +31,7 @@ class PatientProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_profile_pyschologist, container, false)
+        return inflater.inflate(R.layout.activity_profile_patient, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
