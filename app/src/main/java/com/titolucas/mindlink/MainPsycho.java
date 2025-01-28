@@ -10,8 +10,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment;
 import com.titolucas.mindlink.databinding.ActivityMainPsychoBinding;
-import com.titolucas.mindlink.home.view.HomeFragment;
-import com.titolucas.mindlink.profile.view.PatientProfileFragment;
+import com.titolucas.mindlink.home.view.PatientHomeFragment;
 import com.titolucas.mindlink.profile.view.PsychoProfileFragment;
 
 public class MainPsycho extends AppCompatActivity {
@@ -24,7 +23,7 @@ public class MainPsycho extends AppCompatActivity {
         binding = ActivityMainPsychoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        changeView(new HomeFragment(),null);
+        changeView(new PatientHomeFragment(),null);
         System.out.println("Entrou no fluxo do psicólogo");
         String userId = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid()
@@ -45,7 +44,7 @@ public class MainPsycho extends AppCompatActivity {
 
             int itemId = item.getItemId();
             if (itemId == R.id.home_nav) {
-                changeView(new HomeFragment(), args);
+                changeView(new PatientHomeFragment(), args);
             } else if (itemId == R.id.consultas_nav) {
                 changeView(new ConsultasPacienteFragment(), args);
             } else if (itemId == R.id.chat_nav) {

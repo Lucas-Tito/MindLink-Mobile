@@ -17,7 +17,7 @@ import com.titolucas.mindlink.home.repository.HomeRepository
 import com.titolucas.mindlink.home.viewmodel.HomeViewModel
 import com.titolucas.mindlink.home.viewmodel.HomeViewModelFactory
 
-class HomeFragment : Fragment() {
+class PatientHomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(HomeRepository())

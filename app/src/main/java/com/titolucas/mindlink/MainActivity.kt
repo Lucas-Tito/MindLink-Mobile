@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment
 import com.titolucas.mindlink.databinding.ActivityMainBinding
-import com.titolucas.mindlink.home.view.HomeFragment
+import com.titolucas.mindlink.home.view.PatientHomeFragment
 import com.titolucas.mindlink.profile.view.PatientProfileFragment
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        changeView(HomeFragment())
+        changeView(PatientHomeFragment())
         Log.i("", "Entrou no fluxo do paciente")
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             when (it.itemId) {
-                R.id.home_nav -> changeView(HomeFragment(), args)
+                R.id.home_nav -> changeView(PatientHomeFragment(), args)
                 R.id.consultas_nav -> changeView(ConsultasPacienteFragment(), args)
                 R.id.chat_nav -> changeView(ChatFragment(), args)
                 R.id.profile_nav -> changeView(PatientProfileFragment(), args)
