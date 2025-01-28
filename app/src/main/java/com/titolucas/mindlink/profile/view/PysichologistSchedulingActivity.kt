@@ -1,6 +1,7 @@
 package com.titolucas.mindlink.profile.view
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -53,6 +54,8 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
             setContentView(R.layout.activity_psychologist_scheduling)
             initializeViews(user)
             setupCalendar()
+
+
         }
     }
 
@@ -70,6 +73,12 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
             .load(user.photoURL)
             .placeholder(R.drawable.ic_user_placeholder)
             .into(profileImage)
+
+        // Adiciona o OnClickListener ao botão "seta_voltar"
+        val setaVoltar = findViewById<View>(R.id.seta_voltar)
+        setaVoltar.setOnClickListener {
+            finish() // Fecha a Activity atual e volta para a anterior
+        }
     }
 
 
