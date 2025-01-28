@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F8F8F8"
+    android:padding="16dp">
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendar_psychologist_custom"
+        android:layout_width="408dp"
+        android:layout_height="322dp"
+        android:layout_marginTop="20dp"
+        app:headerColor="#40ABD7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:selectionColor="#2196F3"
+        app:type="one_day_picker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
