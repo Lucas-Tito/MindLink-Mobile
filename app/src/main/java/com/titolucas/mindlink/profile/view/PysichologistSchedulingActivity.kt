@@ -30,7 +30,7 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
     private lateinit var calendarView: MaterialCalendarView
     private val events: MutableMap<String, String> = mutableMapOf()
 
-    // Exemplo de dados de horários para cada dia
+    // dados de horários para cada dia
     val horariosPorDia: MutableMap<String, List<String>> = mutableMapOf(
         "28-01-2025" to listOf("10:00", "14:00", "16:00", "10:00", "14:00", "16:00"),
         "29-01-2025" to listOf("09:00", "12:00", "15:00")

@@ -1,7 +1,7 @@
 package com.titolucas.mindlink.network
 
-import com.titolucas.mindlink.profile.data.UserRequest
 import com.titolucas.mindlink.generalData.UserResponse
+import com.titolucas.mindlink.profile.data.UserRequest
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path

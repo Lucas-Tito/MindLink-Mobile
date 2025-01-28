@@ -7,3 +7,5 @@ data class UserRequest(
     val professionalType: Boolean,
     val photoURL: String?
 )
+
+
