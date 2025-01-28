@@ -23,7 +23,7 @@ public class MainPsycho extends AppCompatActivity {
         binding = ActivityMainPsychoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        changeView(new PatientHomeFragment(),null);
+        changeView(new PsychoHomeFragment(),null);
         System.out.println("Entrou no fluxo do psicólogo");
         String userId = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid()
@@ -44,7 +44,7 @@ public class MainPsycho extends AppCompatActivity {
 
             int itemId = item.getItemId();
             if (itemId == R.id.home_nav) {
-                changeView(new PatientHomeFragment(), args);
+                changeView(new PsychoHomeFragment(), args);
             } else if (itemId == R.id.consultas_nav) {
                 changeView(new ConsultasPacienteFragment(), args);
             } else if (itemId == R.id.chat_nav) {
