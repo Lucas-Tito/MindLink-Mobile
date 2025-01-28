@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.search.view
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.UserResponse
+import com.titolucas.mindlink.profile.view.PysichologistSchedulingActivity
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
@@ -53,7 +55,10 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
                 .into(profileImage)
 
             scheduleButton.setOnClickListener {
-                //onScheduleClick(user)
+                val context = itemView.context
+                val intent = Intent(context, PysichologistSchedulingActivity::class.java)
+                intent.putExtra("USER_ID", user.uid) // Passa o ID do usuário para a nova Activity
+                context.startActivity(intent)
             }
         }
     }
