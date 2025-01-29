@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment;
 import com.titolucas.mindlink.databinding.ActivityMainPsychoBinding;
-import com.titolucas.mindlink.home.view.PatientHomeFragment;
+import com.titolucas.mindlink.home.view.PsychoHomeFragment;
+import com.titolucas.mindlink.messages.view.ChatFragment;
 import com.titolucas.mindlink.profile.view.PsychoProfileFragment;
 
 public class MainPsycho extends AppCompatActivity {

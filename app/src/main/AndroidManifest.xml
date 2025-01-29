@@ -20,7 +20,7 @@
             android:name=".appointment.ConsultasAgendadasPaciente"
             android:exported="false" />
         <activity
-            android:name=".EsqueceuSenha"
+            android:name=".login.view.EsqueceuSenha"
             android:exported="false" />
         <activity
             android:name=".register.view.RegisterActivity"

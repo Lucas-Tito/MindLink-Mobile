@@ -11,7 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment
 import com.titolucas.mindlink.databinding.ActivityMainBinding
 import com.titolucas.mindlink.home.view.PatientHomeFragment
+import com.titolucas.mindlink.home.view.PsychoHomeFragment
+import com.titolucas.mindlink.messages.view.ChatFragment
 import com.titolucas.mindlink.profile.view.PatientProfileFragment
+import com.titolucas.mindlink.profile.view.PsychoProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,12 +43,15 @@ class MainActivity : AppCompatActivity() {
                 putString("USER_ID", userId)
             }
 
-            when (it.itemId) {
-                R.id.home_nav -> changeView(PatientHomeFragment(), args)
-                R.id.consultas_nav -> changeView(ConsultasPacienteFragment(), args)
-                R.id.chat_nav -> changeView(ChatFragment(), args)
-                R.id.profile_nav -> changeView(PatientProfileFragment(), args)
-                else -> {}
+            val itemId: Int = it.getItemId()
+            if (itemId == R.id.home_nav) {
+                changeView(PsychoHomeFragment(), args)
+            } else if (itemId == R.id.consultas_nav) {
+                changeView(ConsultasPacienteFragment(), args)
+            } else if (itemId == R.id.chat_nav) {
+                changeView(ChatFragment(), args)
+            } else if (itemId == R.id.profile_nav) {
+                changeView(PsychoProfileFragment(), args)
             }
             true
         }
