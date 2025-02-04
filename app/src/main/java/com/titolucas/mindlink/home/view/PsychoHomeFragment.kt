@@ -51,7 +51,7 @@ class PsychoHomeFragment : Fragment() {
         // Verifica se a lista está vazia ou nula
         if (appointments.isNullOrEmpty()) {
             println("Nenhum compromisso encontrado para este profissional.")
-            calendarView.setEvents(emptyList()) // Garante que o calendário não tenha eventos antigos
+            calendarView.setEvents(emptyList())
             return
         }
 

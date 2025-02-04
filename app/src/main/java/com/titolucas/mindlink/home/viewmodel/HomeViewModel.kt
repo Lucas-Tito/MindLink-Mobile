@@ -33,10 +33,23 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
             _searchResults.postValue(results)
         }
     }
-    fun getAppointmentsByProfessionalIdInCurrentMonth(professionalId : String){
+    fun getAppointmentsByProfessionalIdInCurrentMonth(professionalId: String) {
         viewModelScope.launch {
-            val results = repository.getAppointmentsByProfessionalIdInCurrentMonth(professionalId)
-            _appointmentCurrentMonth.postValue(results)
+            try {
+                val appointments = repository.getAppointmentsByProfessionalIdInCurrentMonth(professionalId)
+                _appointmentCurrentMonth.postValue(appointments) // Atualiza a UI com os resultados
+            } catch (e: retrofit2.HttpException) {
+                if (e.code() == 404) {
+                    println("Nenhum compromisso encontrado (Erro 404)")
+                    _appointmentCurrentMonth.postValue(emptyList()) // Mostra o calendário sem eventos
+                } else {
+                    println("Erro na requisição: ${e.message()}")
+                }
+            } catch (e: Exception) {
+                println("Erro inesperado: ${e.message}")
+                _appointmentCurrentMonth.postValue(emptyList()) // Garante que o calendário não fique sem atualização
+            }
         }
     }
+
 }
