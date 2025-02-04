@@ -6,55 +6,68 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.titolucas.mindlink.R
+import com.titolucas.mindlink.home.repository.HomeRepository
+import com.titolucas.mindlink.home.viewmodel.HomeViewModel
+import com.titolucas.mindlink.home.viewmodel.HomeViewModelFactory
+import androidx.fragment.app.viewModels
+import com.applandeo.materialcalendarview.CalendarView
+import com.applandeo.materialcalendarview.EventDay
+import com.google.firebase.auth.FirebaseAuth
+import com.titolucas.mindlink.generalData.Appointment
+import java.util.Calendar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PsychoHomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PsychoHomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(HomeRepository())
     }
+
+    private lateinit var calendarView: CalendarView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_psycho, container, false)
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_home_psycho, container, false)
+
+        // Referência para o CalendarView
+        calendarView = view.findViewById(R.id.calendar_psychologist_custom)
+
+        // Observa os dados e atualiza o calendário
+        viewModel.appointmentCurrentMonth.observe(viewLifecycleOwner) { appointments ->
+            markAppointmentsOnCalendar(appointments)
+        }
+
+        // Busca os compromissos do mês
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        viewModel.getAppointmentsByProfessionalIdInCurrentMonth(userId.toString())
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PsychoHomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun markAppointmentsOnCalendar(appointments: List<Appointment>?) {
+        val events = mutableListOf<EventDay>()
+
+        // Verifica se a lista está vazia ou nula
+        if (appointments.isNullOrEmpty()) {
+            println("Nenhum compromisso encontrado para este profissional.")
+            calendarView.setEvents(emptyList()) // Garante que o calendário não tenha eventos antigos
+            return
+        }
+
+        for (appointment in appointments) {
+            val date = appointment.appointmentDate
+            val calendar = Calendar.getInstance()
+            calendar.set(date.year, date.month - 1, date.day) // Ajuste do mês
+
+            println("Adicionando evento no dia: ${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.YEAR)}")
+
+            // Adiciona um evento no dia do compromisso
+            events.add(EventDay(calendar, R.drawable.ic_event_marker))
+        }
+
+        // Atualiza o calendário com os eventos
+        calendarView.setEvents(events)
     }
+
 }

@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.network
 
+import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.profile.data.UserRequest
 import retrofit2.http.GET
@@ -15,6 +16,9 @@ interface ApiService {
 
     @GET("users/{id}")
     suspend fun getUserById(@Path("id") userId: String): UserResponse
+
+    @GET("appointments/currentmonth/{id}")
+    suspend fun getAppointmentsByProfessionalIdInCurrentMonth(@Path("id") professionalId: String): List<Appointment>
 
     @GET("users/checkIfIsProfessional/{id}")
     suspend fun checkIfUserIsProfessional(@Path("id") userId: String): Boolean

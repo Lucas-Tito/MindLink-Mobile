@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation("com.applandeo:material-calendar-view:1.9.0")
     implementation(libs.firebase.firestore.ktx)  // Alias correto para Firestore (via Version Catalog)
     implementation(libs.androidx.recyclerview)  // Correto, usando o alias do Version Catalog
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
@@ -65,4 +66,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.applandeo:material-calendar-view:1.9.2")
+
 }

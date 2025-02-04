@@ -14,3 +14,22 @@ data class UserResponse(
     val rating:Double? = null
 
 )
+
+data class Appointment(
+    val id: String,
+    val patientName: String,
+    val patientId: String,
+    val professionalName: String,
+    val professionalId: String,
+    val appointmentDate: AppointmentDate
+)
+
+data class AppointmentDate(
+    val seconds: Int,
+    val hour: String,
+    val minutes: String,
+    val day: Int,
+    val year: Int,
+    val month: Int
+)
+

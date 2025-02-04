@@ -18,6 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:selectionColor="#2196F3"
-        app:type="one_day_picker" />
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
