@@ -17,8 +17,15 @@
         android:theme="@style/Theme.MindLink"
         tools:targetApi="31">
         <activity
-            android:name=".appointment.ConsultasAgendadasPaciente"
-            android:exported="false" />
+            android:name=".service_hours.ServiceHours"
+            android:exported="true">
+
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
+
         <activity
             android:name=".login.view.EsqueceuSenha"
             android:exported="false" />
@@ -28,65 +35,42 @@
             android:theme="@style/Theme.MindLink" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainPsycho"
-            android:exported="true">
-        </activity>
-        <activity android:name=".search.view.SearchActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
-            android:name=".ChatActivity"
-            android:exported="true">
+            android:name=".search.view.SearchActivity"
+            android:exported="true"></activity>
 
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
         <activity android:name=".profile.view.ProfileActivity" />
-
         <activity android:name=".profile.view.ProfileEditActivity" />
-        
-        <activity android:name=".profile.view.PysichologistSchedulingActivity"
+        <activity
+            android:name=".profile.view.PysichologistSchedulingActivity"
             android:exported="true">
-<!--        <intent-filter>-->
-<!--            <action android:name="android.intent.action.MAIN" />-->
-<!--            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--        </intent-filter>-->
 
-    </activity>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
         <activity
             android:name=".login.view.LoginActivity"
             android:exported="true">
-<!--          <intent-filter>-->
-<!--               <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-        <activity
-            android:name=".PerfilPsicologo"
-            android:exported="true">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
 
 

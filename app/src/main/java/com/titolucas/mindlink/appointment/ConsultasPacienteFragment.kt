@@ -41,7 +41,7 @@ class ConsultasPacienteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consultas_paciente, container, false)
+        return inflater.inflate(R.layout.fragment_appointment_paciente, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class ConsultasPacienteFragment : Fragment() {
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
         consultasMockadas.forEach { consulta ->
-            val card = LayoutInflater.from(context).inflate(R.layout.consulta_card, container, false)
+            val card = LayoutInflater.from(context).inflate(R.layout.item_appointment_card, container, false)
 
             // Configure o card com os dados da consulta
             val nomePsicoTextView = card.findViewById<TextView>(R.id.nome_psico)
