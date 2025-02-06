@@ -1,10 +1,12 @@
 package com.titolucas.mindlink.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.home.repository.HomeRepository
 import com.titolucas.mindlink.home.viewmodel.HomeViewModel
@@ -14,6 +16,7 @@ import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.generalData.Appointment
+import com.titolucas.mindlink.service_hours.view.ServiceHours
 import java.util.Calendar
 
 class PsychoHomeFragment : Fragment() {
@@ -41,6 +44,14 @@ class PsychoHomeFragment : Fragment() {
         // Busca os compromissos do mês
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         viewModel.getAppointmentsByProfessionalIdInCurrentMonth(userId.toString())
+
+        // Adiciona o clickListener no botão service_hours_button
+        val serviceHoursButton = view.findViewById<Button>(R.id.service_hours_button)
+        serviceHoursButton.setOnClickListener {
+            val intent = Intent(activity, ServiceHours::class.java)
+            startActivity(intent)
+        }
+
 
         return view
     }

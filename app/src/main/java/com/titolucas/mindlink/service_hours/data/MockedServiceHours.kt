@@ -1,4 +1,4 @@
-package com.titolucas.mindlink.service_hours
+package com.titolucas.mindlink.service_hours.data
 
 import java.util.Calendar
 import java.util.Date

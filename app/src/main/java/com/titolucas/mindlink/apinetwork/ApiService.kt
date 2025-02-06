@@ -3,6 +3,8 @@ package com.titolucas.mindlink.network
 import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.profile.data.UserRequest
+import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -32,5 +34,7 @@ interface ApiService {
     @GET("searchPsyco")
     suspend fun searchPsychologists(@Query("q") query: String): List<UserResponse>
 
+    @POST("availability")
+    fun postAvailability(@Body body: AvailabilityRequest): Call<Void>
 
 }

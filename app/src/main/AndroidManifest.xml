@@ -17,7 +17,7 @@
         android:theme="@style/Theme.MindLink"
         tools:targetApi="31">
         <activity
-            android:name=".service_hours.ServiceHours"
+            android:name=".service_hours.view.ServiceHours"
             android:exported="true">
 
 <!--             <intent-filter>-->
