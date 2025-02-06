@@ -43,7 +43,9 @@
             android:drawableEnd="@drawable/clock_icon_gray"
             android:fontFamily="@font/work_sans"
             android:hint="Início"
-            android:inputType="textEmailAddress" />
+            android:inputType="none"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
 
         <EditText
             android:id="@+id/ending_hour_bottom_sheet"
@@ -55,12 +57,26 @@
             android:drawableEnd="@drawable/clock_icon_gray"
             android:fontFamily="@font/work_sans"
             android:hint="Fim"
-            android:inputType="textEmailAddress" />
+            android:inputType="none"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/add_service_hour_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="25dp"
+        android:backgroundTint="#CDE5FF"
+        android:fontFamily="@font/work_sans_bold"
+        android:text="Adicionar"
+        android:textColor="#4894FE"
+/>
+
+    <Button
         android:id="@+id/cancel_button_bottom_sheet"
-        android:layout_marginTop="65px"
+        android:layout_marginTop="30px"
         android:layout_marginBottom="65px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

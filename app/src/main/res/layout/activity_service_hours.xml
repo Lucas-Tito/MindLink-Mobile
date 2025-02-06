@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".service_hours.ServiceHours">
 
+    <ImageButton
+        android:id="@+id/service_hours_return_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="28dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/left_arrow" />
+
     <TextView
         android:id="@+id/textView24"
         android:layout_width="0dp"

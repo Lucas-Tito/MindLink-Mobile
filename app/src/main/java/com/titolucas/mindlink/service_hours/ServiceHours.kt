@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.service_hours
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
@@ -16,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.titolucas.mindlink.R
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
 class ServiceHours : AppCompatActivity() {
@@ -46,10 +48,44 @@ class ServiceHours : AppCompatActivity() {
                 dayInput.adapter = adapter
             }
 
+            val returnButton = findViewById<ImageButton>(R.id.service_hours_return_button)
+            returnButton.setOnClickListener {
+                finish()
+            }
+
             // Declarar os inputs e botões
             val startingHourInput = view.findViewById<EditText>(R.id.starting_hour_bottom_sheet)
             val endingHourInput = view.findViewById<EditText>(R.id.ending_hour_bottom_sheet)
+            val addButton = view.findViewById<Button>(R.id.add_service_hour_button)
             val cancelButton = view.findViewById<Button>(R.id.cancel_button_bottom_sheet)
+
+            // Configurar o TimePicker para endingHourInput (opcional, se necessário)
+            endingHourInput.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                val minute = calendar.get(Calendar.MINUTE)
+
+                val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
+                    val formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
+                    endingHourInput.setText(formattedTime)
+                }, hour, minute, true)
+
+                timePickerDialog.show()
+            }
+
+            // Configurar o TimePicker para startingHourInput (opcional, se necessário)
+            startingHourInput.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                val minute = calendar.get(Calendar.MINUTE)
+
+                val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
+                    val formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
+                    startingHourInput.setText(formattedTime)
+                }, hour, minute, true)
+
+                timePickerDialog.show()
+            }
 
             cancelButton.setOnClickListener {
                 bottomSheetDialog.dismiss()

@@ -46,11 +46,12 @@ class PsychoHomeFragment : Fragment() {
         viewModel.getAppointmentsByProfessionalIdInCurrentMonth(userId.toString())
 
         // Adiciona o clickListener no botão service_hours_button
-        val serviceHoursButton = view.findViewById<Button>(R.id.service_hours_buttom)
+        val serviceHoursButton = view.findViewById<Button>(R.id.service_hours_button)
         serviceHoursButton.setOnClickListener {
             val intent = Intent(activity, ServiceHours::class.java)
             startActivity(intent)
         }
+
 
         return view
     }
