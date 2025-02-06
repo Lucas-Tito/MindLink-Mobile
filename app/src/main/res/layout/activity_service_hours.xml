@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".service_hours.ServiceHours">
+    tools:context=".service_hours.view.ServiceHours">
 
     <ImageButton
         android:id="@+id/service_hours_return_button"

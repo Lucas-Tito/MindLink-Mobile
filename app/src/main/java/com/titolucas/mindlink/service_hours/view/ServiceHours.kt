@@ -1,4 +1,4 @@
-package com.titolucas.mindlink.service_hours
+package com.titolucas.mindlink.service_hours.view
 
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -10,17 +10,29 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
+import com.titolucas.mindlink.network.RetrofitInstance
+import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
+import com.titolucas.mindlink.service_hours.data.EndTime
+import com.titolucas.mindlink.service_hours.data.StartTime
+import com.titolucas.mindlink.service_hours.data.horariosMockados
+import retrofit2.Call
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import retrofit2.Callback
+import retrofit2.Response
 
 class ServiceHours : AppCompatActivity() {
+    private val apiService = RetrofitInstance.apiService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -86,6 +98,38 @@ class ServiceHours : AppCompatActivity() {
 
                 timePickerDialog.show()
             }
+
+            addButton.setOnClickListener {
+                val userId = FirebaseAuth.getInstance().currentUser?.uid
+                val dayOfWeek = dayInput.selectedItem.toString()
+                val startTime = startingHourInput.text.toString().split(":")
+                val endTime = endingHourInput.text.toString().split(":")
+
+                val request = AvailabilityRequest(
+                    dayOfWeek,
+                    userId,
+                    StartTime(startTime[0], startTime[1]),
+                    EndTime(endTime[0], endTime[1])
+                )
+
+                apiService.postAvailability(request).enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(this@ServiceHours, "Horário adicionado com sucesso!", Toast.LENGTH_SHORT).show()
+                            println("Success")
+                            bottomSheetDialog.dismiss()
+                        } else {
+                            Toast.makeText(this@ServiceHours, "Falha ao adicionar horário: ${response.code()}", Toast.LENGTH_SHORT).show()
+                            println("Failed: ${response.code()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        println("Error: ${t.message}")
+                    }
+                })
+            }
+
 
             cancelButton.setOnClickListener {
                 bottomSheetDialog.dismiss()

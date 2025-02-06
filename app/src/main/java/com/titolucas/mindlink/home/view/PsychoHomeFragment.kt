@@ -16,7 +16,7 @@ import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.generalData.Appointment
-import com.titolucas.mindlink.service_hours.ServiceHours
+import com.titolucas.mindlink.service_hours.view.ServiceHours
 import java.util.Calendar
 
 class PsychoHomeFragment : Fragment() {
