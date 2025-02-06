@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F8F8F8"
     android:padding="16dp">
 
+    <Button
+        android:id="@+id/service_hours_buttom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Horários"
+        android:drawableLeft="@drawable/clock_icon_blue"
+        android:textColor="#4894FE"
+        android:background="@drawable/service_hours_buttom_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendar_psychologist_custom"
         android:layout_width="408dp"
         android:layout_height="322dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         app:headerColor="#40ABD7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:selectionColor="#2196F3"
-         />
+        app:layout_constraintTop_toBottomOf="@id/service_hours_buttom"
+        app:selectionColor="#2196F3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

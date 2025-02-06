@@ -1,16 +1,18 @@
 package com.titolucas.mindlink.service_hours
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.titolucas.mindlink.R
-import com.titolucas.mindlink.appointment.consultasMockadas
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -23,6 +25,25 @@ class ServiceHours : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val showBottomSheetButton = findViewById<ImageButton>(R.id.showBottomSheet)
+        showBottomSheetButton.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+
+            // Declarar os inputs e botões
+            val dayInput = view.findViewById<EditText>(R.id.day_input_bottom_sheet)
+            val startingHourInput = view.findViewById<EditText>(R.id.starting_hour_bottom_sheet)
+            val endingHourInput = view.findViewById<EditText>(R.id.ending_hour_bottom_sheet)
+            val cancelButton = view.findViewById<Button>(R.id.cancel_button_bottom_sheet)
+
+            cancelButton.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetDialog.setContentView(view)
+            bottomSheetDialog.show()
         }
 
         val container = findViewById<LinearLayout>(R.id.service_hours_container)
