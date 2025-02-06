@@ -45,13 +45,13 @@ class MainActivity : AppCompatActivity() {
 
             val itemId: Int = it.getItemId()
             if (itemId == R.id.home_nav) {
-                changeView(PsychoHomeFragment(), args)
+                changeView(PatientHomeFragment(), args)
             } else if (itemId == R.id.consultas_nav) {
                 changeView(ConsultasPacienteFragment(), args)
             } else if (itemId == R.id.chat_nav) {
                 changeView(ChatFragment(), args)
             } else if (itemId == R.id.profile_nav) {
-                changeView(PsychoProfileFragment(), args)
+                changeView(PatientProfileFragment(), args)
             }
             true
         }
