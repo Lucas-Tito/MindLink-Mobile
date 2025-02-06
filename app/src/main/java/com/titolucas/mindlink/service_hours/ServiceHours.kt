@@ -2,10 +2,12 @@ package com.titolucas.mindlink.service_hours
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +34,19 @@ class ServiceHours : AppCompatActivity() {
             val bottomSheetDialog = BottomSheetDialog(this)
             val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
 
+
+            // Configurar o Spinner
+            val dayInput = view.findViewById<Spinner>(R.id.day_input_bottom_sheet)
+            ArrayAdapter.createFromResource(
+                this,
+                R.array.week_days,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                dayInput.adapter = adapter
+            }
+
             // Declarar os inputs e botões
-            val dayInput = view.findViewById<EditText>(R.id.day_input_bottom_sheet)
             val startingHourInput = view.findViewById<EditText>(R.id.starting_hour_bottom_sheet)
             val endingHourInput = view.findViewById<EditText>(R.id.ending_hour_bottom_sheet)
             val cancelButton = view.findViewById<Button>(R.id.cancel_button_bottom_sheet)
