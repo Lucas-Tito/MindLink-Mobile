@@ -33,20 +33,22 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
 
     // dados de horários para cada dia
     val horariosPorDia: MutableMap<String, List<String>> = mutableMapOf(
-        "28-01-2025" to listOf("10:00", "14:00", "16:00", "10:00", "14:00", "16:00"),
-        "29-01-2025" to listOf("09:00", "12:00", "15:00")
+        "25-02-2025" to listOf("10:00", "14:00", "16:00", "10:00", "14:00", "16:00"),
+        "20-02-2025" to listOf("09:00", "12:00", "15:00")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Verifica autenticação
+        val psychoId = intent.getStringExtra("USER_ID") ?: ""
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
             finish()
             return
         } else {
-            viewModel.fetchUserById(userId)
+            viewModel.fetchUserById(psychoId)
+            println("Psyco ID: "+ psychoId)
         }
 
         // Observa os detalhes do usuário
@@ -108,13 +110,13 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
         // Lista de eventos mockados, mas as imagens não estáo indicando, então coloquei verde por enquanto
         val mockEvents = listOf(
             Event(
-                date = "28-01-2025",
+                date = "25-02-2025",
                 labelColor = R.color.horários_disponives,
                 imageResource = R.drawable.favorite_star,
                 description = "Consulta disponível"
             ),
             Event(
-                date = "29-01-2025",
+                date = "20-02-2025",
                 labelColor = R.color.horários_disponives,
                 imageResource = R.drawable.selected_day_background,
                 description = "Consulta disponível"
