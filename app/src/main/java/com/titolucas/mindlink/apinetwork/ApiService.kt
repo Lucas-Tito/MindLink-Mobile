@@ -37,4 +37,7 @@ interface ApiService {
     @POST("availability")
     fun postAvailability(@Body body: AvailabilityRequest): Call<Void>
 
+    @GET("availability/{id}")
+    suspend fun getAvailabilityByUserId(@Path("id") userId: String): List<AvailabilityRequest>
+
 }
