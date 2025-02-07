@@ -6,8 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
 
     //NÃO MUDA ESSE URL A NÃO SER QUE DÊ ERRO (10.0.2.2 no android studio corresponde ao ipv4 do host)
-   private const val BASE_URL = "http://10.0.2.2:3000/mindlink/"
-    //private const val BASE_URL = "http://192.168.0.5:3000/mindlink/"
+   //private const val BASE_URL = "http://10.0.2.2:3000/mindlink/"
+    private const val BASE_URL = "http://192.168.1.3:3000/mindlink/"
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()
