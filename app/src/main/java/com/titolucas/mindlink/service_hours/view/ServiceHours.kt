@@ -23,6 +23,10 @@ import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
 import com.titolucas.mindlink.service_hours.data.EndTime
 import com.titolucas.mindlink.service_hours.data.StartTime
 import com.titolucas.mindlink.service_hours.data.horariosMockados
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -42,6 +46,8 @@ class ServiceHours : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
         val showBottomSheetButton = findViewById<ImageButton>(R.id.showBottomSheet)
         showBottomSheetButton.setOnClickListener {
@@ -100,7 +106,6 @@ class ServiceHours : AppCompatActivity() {
             }
 
             addButton.setOnClickListener {
-                val userId = FirebaseAuth.getInstance().currentUser?.uid
                 val dayOfWeek = dayInput.selectedItem.toString()
                 val startTime = startingHourInput.text.toString().split(":")
                 val endTime = endingHourInput.text.toString().split(":")
@@ -143,20 +148,31 @@ class ServiceHours : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-        horariosMockados.forEach { horario ->
-            val card = LayoutInflater.from(this).inflate(R.layout.item_service_hours, container, false)
+        if (userId != null) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val availabilityList = apiService.getAvailabilityByUserId(userId)
+                    withContext(Dispatchers.Main) {
+                        availabilityList.forEach { availability ->
+                            val card = LayoutInflater.from(this@ServiceHours).inflate(R.layout.item_service_hours, container, false)
 
-            // Configure o card com os dados da consulta
-            val diaTextView = card.findViewById<TextView>(R.id.dia)
-            val dataTextView = card.findViewById<TextView>(R.id.data)
-            val horaTextView = card.findViewById<TextView>(R.id.hora)
+                            // Configure o card com os dados da consulta
+                            val diaTextView = card.findViewById<TextView>(R.id.dia)
+                            val dataTextView = card.findViewById<TextView>(R.id.data)
+                            val horaTextView = card.findViewById<TextView>(R.id.hora)
 
-            diaTextView.text = horario.dia
-            dataTextView.text = dateFormat.format(horario.dataHora)
-            horaTextView.text = timeFormat.format(horario.dataHora)
+                            diaTextView.text = availability.dayOfWeek
+                            dataTextView.text = dateFormat.format(Calendar.getInstance().time) // Ajuste conforme necessário
+                            horaTextView.text = "${availability.startTime.startHour}:${availability.startTime.startMinute} - ${availability.endTime.endHour}:${availability.endTime.endMinute}"
 
-            // Adicione o card ao contêiner
-            container.addView(card)
+                            // Adicione o card ao contêiner
+                            container.addView(card)
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
     }
 }

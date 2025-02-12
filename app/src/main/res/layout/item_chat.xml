@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#FFFFFF"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
+
+    <!-- Linha contendo a imagem e as informações -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Imagem do Psicólogo -->
+        <ImageView
+            android:id="@+id/psychologist_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_profile"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Informações do Psicólogo -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <!-- Nome -->
+            <TextView
+                android:id="@+id/psychologist_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ayrton Senna"
+                android:fontFamily="@font/work_sans_bold"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Especialidade e Classificação -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Especialidade -->
+                <TextView
+                    android:id="@+id/psychologist_specialty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="If you no longer go for a gap..."
+                    android:textSize="14sp"
+                    android:fontFamily="@font/work_sans"
+                    android:textColor="#7A7A7A"
+                    android:layout_alignParentStart="true" />
+
+                <!-- Classificação -->
+                <TextView
+                    android:id="@+id/psychologist_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2:14 PM"
+                    android:textSize="14sp"
+                    android:textColor="#7A7A7A"
+                    android:fontFamily="@font/work_sans"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
