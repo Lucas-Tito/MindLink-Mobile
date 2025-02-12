@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.titolucas.mindlink.appointment.ConsultasPacienteFragment;
 import com.titolucas.mindlink.databinding.ActivityMainPsychoBinding;
 import com.titolucas.mindlink.home.view.PsychoHomeFragment;
-import com.titolucas.mindlink.messages.view.ChatFragment;
+import com.titolucas.mindlink.messages.view.ChatSelector;
 import com.titolucas.mindlink.profile.view.PsychoProfileFragment;
 
 public class MainPsycho extends AppCompatActivity {
@@ -49,7 +49,7 @@ public class MainPsycho extends AppCompatActivity {
             } else if (itemId == R.id.consultas_nav) {
                 changeView(new ConsultasPacienteFragment(), args);
             } else if (itemId == R.id.chat_nav) {
-                changeView(new ChatFragment(), args);
+                changeView(new ChatSelector(), args);
             } else if (itemId == R.id.profile_nav) {
                 changeView(new PsychoProfileFragment(), args);
             }
