@@ -8,7 +8,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
-import com.titolucas.mindlink.appointment.ConsultasPacienteFragment;
+import com.titolucas.mindlink.appointment.ConsultasPsychoFragment;
 import com.titolucas.mindlink.databinding.ActivityMainPsychoBinding;
 import com.titolucas.mindlink.home.view.PsychoHomeFragment;
 import com.titolucas.mindlink.messages.view.ChatSelector;
@@ -47,7 +47,7 @@ public class MainPsycho extends AppCompatActivity {
             if (itemId == R.id.home_nav) {
                 changeView(new PsychoHomeFragment(), args);
             } else if (itemId == R.id.consultas_nav) {
-                changeView(new ConsultasPacienteFragment(), args);
+                changeView(new ConsultasPsychoFragment(), args);
             } else if (itemId == R.id.chat_nav) {
                 changeView(new ChatSelector(), args);
             } else if (itemId == R.id.profile_nav) {

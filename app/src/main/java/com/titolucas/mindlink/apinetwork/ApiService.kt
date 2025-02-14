@@ -21,8 +21,11 @@ interface ApiService {
     @GET("users/{id}")
     suspend fun getUserById(@Path("id") userId: String): UserResponse
 
-    @GET("appointments/currentmonth/{id}")
+    @GET("appointments/currentmonthprofessional/{id}")
     suspend fun getAppointmentsByProfessionalIdInCurrentMonth(@Path("id") professionalId: String): List<Appointment>
+
+    @GET("appointments/currentmonthpatient/{id}")
+    suspend fun getAppointmentsByPatientIdInCurrentMonth(@Path("id") patientId: String): List<Appointment>
 
     @GET("users/checkIfIsProfessional/{id}")
     suspend fun checkIfUserIsProfessional(@Path("id") userId: String): Boolean
@@ -44,6 +47,9 @@ interface ApiService {
 
     @POST("appointment")
     suspend fun createAppointment(@Body appointmentRequest: AppointmentRequest): Response<Void>
+
+    @GET("availability/{id}")
+    suspend fun getAvailabilityByUserId(@Path("id") userId: String): List<AvailabilityRequest>
 
 
 }
