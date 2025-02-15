@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.messages.data.MessageRequest
+import com.titolucas.mindlink.messages.utils.DateUtils
 
 class ChatMessagesAdapter(private val messages: List<MessageRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -38,10 +39,10 @@ class ChatMessagesAdapter(private val messages: List<MessageRequest>) : Recycler
         val message = messages[position]
         if (holder is SentMessageViewHolder) {
             holder.messageText.text = message.text
-            holder.messageCreatedAt.text = message.createdAt
+            holder.messageCreatedAt.text = DateUtils.formatDate(message.createdAt)
         } else if (holder is ReceivedMessageViewHolder) {
             holder.messageText.text = message.text
-            holder.messageCreatedAt.text = message.createdAt
+            holder.messageCreatedAt.text = DateUtils.formatDate(message.createdAt)
         }
     }
 

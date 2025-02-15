@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.messages.data.ConversationsRequest
 import com.titolucas.mindlink.messages.data.LastMessageRequest
+import com.titolucas.mindlink.messages.utils.DateUtils
 
 class ChatSelectorAdapter(
     private val chatList: List<LastMessageRequest>,
@@ -29,7 +30,7 @@ class ChatSelectorAdapter(
         val chat = chatList[position]
         holder.nomeChat.text = chat.contactName
         holder.lastMessageChat.text = chat.lastMessage
-        holder.hora.text = chat.createdAt
+        holder.hora.text = DateUtils.formatDate(chat.createdAt)
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
