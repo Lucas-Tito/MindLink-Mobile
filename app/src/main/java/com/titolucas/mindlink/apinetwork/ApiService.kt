@@ -4,6 +4,8 @@ import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.generalData.AppointmentRequest
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.messages.data.ConversationsRequest
+import com.titolucas.mindlink.messages.data.LastMessageRequest
+import com.titolucas.mindlink.messages.data.MessageRequest
 import com.titolucas.mindlink.profile.data.UserRequest
 import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
 import retrofit2.Call
@@ -52,7 +54,13 @@ interface ApiService {
     @GET("availability/{id}")
     suspend fun getAvailabilityByUserId(@Path("id") userId: String): List<AvailabilityRequest>
 
-    @GET("messages/conversations/{id}")
-    suspend fun getConversationsByUserId(@Path("id") userId: String): List<ConversationsRequest>
+    @GET("messages/conversations/{userId}/{contactId}")
+    suspend fun getConversationsByUserId(@Path("userId") userId: String, @Path("contactId") contactId: String): List<ConversationsRequest>
+
+    @GET("messages/lastMessage/{id}")
+    suspend fun getLastMessagesByUserId(@Path("id") userId: String): List<LastMessageRequest>
+
+    @POST("messages")
+    suspend fun createMessage(@Body messageRequest: MessageRequest): Response<Void>
 
 }

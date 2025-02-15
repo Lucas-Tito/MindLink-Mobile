@@ -6,8 +6,3 @@ data class ConversationsRequest(
     val messages: List<MessageRequest>
 )
 
-data class Chat(
-    val nomeChat: String,
-    val lastMessageChat: String,
-    val hora: String
-)

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/main"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".messages.view.ChatActivity">
 
     <LinearLayout
         android:id="@+id/header_chat"
@@ -82,7 +84,7 @@
             android:layout_weight="1"/>
 
         <ImageButton
-            android:id="@+id/showBottomSheet"
+            android:id="@+id/sendMessage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@null"

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
-import com.titolucas.mindlink.messages.data.Chat
 import com.titolucas.mindlink.network.RetrofitInstance
 import kotlinx.coroutines.launch
 
@@ -34,17 +33,9 @@ class ChatSelector : Fragment() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             lifecycleScope.launch {
-                val conversations = RetrofitInstance.apiService.getConversationsByUserId(userId)
-                val chatList = conversations.map { conversation ->
-                    Chat(
-                        nomeChat = conversation.contactName,
-                        lastMessageChat = conversation.messages.lastOrNull()?.text ?: "",
-                        hora = conversation.messages.lastOrNull()?.createdAt ?: ""
-                    )
-                }
+                val lastMessages = RetrofitInstance.apiService.getLastMessagesByUserId(userId)
 
-
-                recyclerView.adapter = ChatSelectorAdapter(chatList, conversations)
+                recyclerView.adapter = ChatSelectorAdapter(lastMessages)
             }
         }
 

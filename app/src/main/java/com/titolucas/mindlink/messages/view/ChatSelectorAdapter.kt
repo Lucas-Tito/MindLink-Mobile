@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.titolucas.mindlink.R
-import com.titolucas.mindlink.messages.data.Chat
 import com.titolucas.mindlink.messages.data.ConversationsRequest
+import com.titolucas.mindlink.messages.data.LastMessageRequest
 
 class ChatSelectorAdapter(
-    private val chatList: List<Chat>,
-    private val conversationsList: List<ConversationsRequest>
+    private val chatList: List<LastMessageRequest>,
 ) : RecyclerView.Adapter<ChatSelectorAdapter.ChatViewHolder>() {
 
     class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,16 +27,14 @@ class ChatSelectorAdapter(
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val chat = chatList[position]
-        holder.nomeChat.text = chat.nomeChat
-        holder.lastMessageChat.text = chat.lastMessageChat
-        holder.hora.text = chat.hora
+        holder.nomeChat.text = chat.contactName
+        holder.lastMessageChat.text = chat.lastMessage
+        holder.hora.text = chat.createdAt
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ChatActivity::class.java).apply {
-                putExtra("contactId", conversationsList[position].contactId)
-                putExtra("contactName", conversationsList[position].contactName)
-                putParcelableArrayListExtra("messages", ArrayList(conversationsList[position].messages))
+                putExtra("contactId", chatList[position].contactUserId)
             }
             context.startActivity(intent)
         }
