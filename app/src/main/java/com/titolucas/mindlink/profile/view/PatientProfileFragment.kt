@@ -51,19 +51,12 @@ class PatientProfileFragment : Fragment() {
                 user = fetchedUser
                 isProfessional = user.professionalType
 
-                // Atualiza o layout baseado no tipo do usuário
-                val parent = view.parent as ViewGroup
-                val layoutId = R.layout.activity_profile_patient
 
 
-                parent.removeAllViews()
-                val newView = layoutInflater.inflate(layoutId, parent, false)
-                parent.addView(newView)
-
-                val profileImage = newView.findViewById<ShapeableImageView>(R.id.picture_profile_patient)
-                val profileName = newView.findViewById<TextView>(R.id.name_profile_patient)
-                val bioText = newView.findViewById<TextView>(R.id.bio_patient)
-                val editProfileButton = newView.findViewById<TextView>(R.id.tvEditarPerfil)
+                val profileImage = view.findViewById<ShapeableImageView>(R.id.picture_profile_patient)
+                val profileName = view.findViewById<TextView>(R.id.name_profile_patient)
+                val bioText = view.findViewById<TextView>(R.id.bio_patient)
+                val editProfileButton = view.findViewById<TextView>(R.id.tvEditarPerfil)
 
                 profileName.text = user.name
                 bioText.text = user.bio ?: "Nenhuma bio disponível"
