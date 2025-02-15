@@ -44,7 +44,7 @@ class ChatSelector : Fragment() {
                 }
 
 
-                recyclerView.adapter = ChatAdapter(chatList)
+                recyclerView.adapter = ChatSelectorAdapter(chatList)
             }
         }
 

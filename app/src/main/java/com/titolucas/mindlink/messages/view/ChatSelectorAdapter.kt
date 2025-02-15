@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.messages.data.Chat
 
-class ChatAdapter(private val chatList: List<Chat>) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
+class ChatSelectorAdapter(private val chatList: List<Chat>) : RecyclerView.Adapter<ChatSelectorAdapter.ChatViewHolder>() {
 
     class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nomeChat: TextView = itemView.findViewById(R.id.psychologist_name)
