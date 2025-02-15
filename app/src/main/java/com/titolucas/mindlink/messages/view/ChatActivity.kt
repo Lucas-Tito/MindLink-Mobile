@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.messages.data.MessageRequest
 import com.titolucas.mindlink.network.RetrofitInstance
@@ -22,6 +22,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var buttonSendMessage: ImageButton
     private lateinit var messagesAdapter: ChatMessagesAdapter
     private var messages: ArrayList<MessageRequest> = arrayListOf()
+    private lateinit var messagesRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +50,9 @@ class ChatActivity : AppCompatActivity() {
 
         // Recuperar mensagens do servidor
         fetchMessages(contactId)
+
+        // Configurar listener para atualizações em tempo real
+        setupRealtimeUpdates(contactId)
     }
 
     private fun fetchMessages(contactId: String?) {
@@ -87,13 +91,45 @@ class ChatActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val response = RetrofitInstance.apiService.createMessage(messageRequest)
             if (response.isSuccessful) {
-                messages.add(messageRequest)
-                messagesAdapter.notifyItemInserted(messages.size - 1)
-                recyclerView.scrollToPosition(messages.size - 1)
+                database.child("messages").child(messageId).setValue(messageRequest)
                 editTextMessage.text.clear()
             } else {
                 // Tratar erro de envio de mensagem
             }
         }
+    }
+
+    private fun setupRealtimeUpdates(contactId: String?) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        messagesRef = FirebaseDatabase.getInstance().getReference("messages")
+
+        messagesRef.orderByChild("participants").equalTo(listOf(userId, contactId).toString())
+            .addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    val message = snapshot.getValue(MessageRequest::class.java)
+                    if (message != null) {
+                        messages.add(message)
+                        messages.sortBy { it.createdAt }
+                        messagesAdapter.notifyDataSetChanged()
+                        recyclerView.scrollToPosition(messages.size - 1)
+                    }
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Implementar se necessário
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    // Implementar se necessário
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                    // Implementar se necessário
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Tratar erro
+                }
+            })
     }
 }
