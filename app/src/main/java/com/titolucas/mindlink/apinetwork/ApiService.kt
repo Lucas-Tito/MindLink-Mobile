@@ -3,6 +3,7 @@ package com.titolucas.mindlink.network
 import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.generalData.AppointmentRequest
 import com.titolucas.mindlink.generalData.UserResponse
+import com.titolucas.mindlink.messages.data.ConversationsRequest
 import com.titolucas.mindlink.profile.data.UserRequest
 import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
 import retrofit2.Call
@@ -51,5 +52,7 @@ interface ApiService {
     @GET("availability/{id}")
     suspend fun getAvailabilityByUserId(@Path("id") userId: String): List<AvailabilityRequest>
 
+    @GET("messages/conversations/{id}")
+    suspend fun getConversationsByUserId(@Path("id") userId: String): List<ConversationsRequest>
 
 }
