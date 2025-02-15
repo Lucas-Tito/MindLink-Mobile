@@ -13,7 +13,7 @@
         android:padding="10dp"
         android:text="Oi, tudo bem?"
         android:textColor="#000000"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/messageCreatedAt"

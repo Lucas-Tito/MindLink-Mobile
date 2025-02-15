@@ -3,12 +3,14 @@ package com.titolucas.mindlink.messages.view
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.titolucas.mindlink.R
@@ -28,6 +30,16 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chat)
+
+        val photoURL = intent.getStringExtra("photoURL")
+        val contactImage = findViewById<ImageView>(R.id.contact_image)
+
+        // Carregar a imagem usando Glide
+        Glide.with(this)
+            .load(photoURL)
+            .placeholder(R.drawable.ic_profile) // Imagem de placeholder
+            .error(R.drawable.ic_profile) // Imagem de erro
+            .into(contactImage)
 
         val contactId = intent.getStringExtra("contactId")
 

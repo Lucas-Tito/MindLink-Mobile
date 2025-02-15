@@ -4,10 +4,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.titolucas.mindlink.R
-import com.titolucas.mindlink.messages.data.ConversationsRequest
+import com.bumptech.glide.Glide
 import com.titolucas.mindlink.messages.data.LastMessageRequest
 import com.titolucas.mindlink.messages.utils.DateUtils
 
@@ -19,6 +20,7 @@ class ChatSelectorAdapter(
         val nomeChat: TextView = itemView.findViewById(R.id.psychologist_name)
         val lastMessageChat: TextView = itemView.findViewById(R.id.psychologist_specialty)
         val hora: TextView = itemView.findViewById(R.id.psychologist_rating)
+        val photo: ImageView = itemView.findViewById(R.id.chat_selector_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
@@ -32,10 +34,18 @@ class ChatSelectorAdapter(
         holder.lastMessageChat.text = chat.lastMessage
         holder.hora.text = DateUtils.formatDate(chat.createdAt)
 
+        // Carregar a imagem usando Glide
+        Glide.with(holder.itemView.context)
+            .load(chat.photoURL)
+            .placeholder(R.drawable.ic_profile) // Imagem de placeholder
+            .error(R.drawable.ic_profile) // Imagem de erro
+            .into(holder.photo)
+
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ChatActivity::class.java).apply {
                 putExtra("contactId", chatList[position].contactUserId)
+                putExtra("photoURL", chatList[position].photoURL)
             }
             context.startActivity(intent)
         }
