@@ -17,15 +17,17 @@
         android:theme="@style/Theme.MindLink"
         tools:targetApi="31">
         <activity
+            android:name=".messages.view.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".service_hours.view.ServiceHours"
             android:exported="true">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
         <activity
             android:name=".login.view.EsqueceuSenha"
             android:exported="false" />
@@ -35,14 +37,13 @@
             android:theme="@style/Theme.MindLink" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainPsycho"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".search.view.SearchActivity"
-            android:exported="true"></activity>
-
+            android:exported="true" />
         <activity android:name=".profile.view.ProfileActivity" />
         <activity android:name=".profile.view.ProfileEditActivity" />
         <activity
@@ -72,7 +73,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <meta-data
             android:name="preloaded_fonts"
