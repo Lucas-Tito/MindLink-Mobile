@@ -41,6 +41,11 @@ class ChatActivity : AppCompatActivity() {
             .error(R.drawable.ic_profile) // Imagem de erro
             .into(contactImage)
 
+        val returnButton = findViewById<ImageButton>(R.id.chat_return_button)
+        returnButton.setOnClickListener {
+            finish()
+        }
+
         val contactId = intent.getStringExtra("contactId")
 
         // Configurar RecyclerView
