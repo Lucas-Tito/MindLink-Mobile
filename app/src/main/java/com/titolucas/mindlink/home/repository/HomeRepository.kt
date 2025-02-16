@@ -18,4 +18,7 @@ class HomeRepository {
     suspend fun getAppointmentsByProfessionalIdInCurrentMonth(professionalId: String): List<Appointment> {
         return apiService.getAppointmentsByProfessionalIdInCurrentMonth(professionalId)
     }
+    suspend fun getAppointmentsByPatientIdInCurrentMonth(professionalId: String): List<Appointment> {
+        return apiService.getAppointmentsByPatientIdInCurrentMonth(professionalId)
+    }
 }

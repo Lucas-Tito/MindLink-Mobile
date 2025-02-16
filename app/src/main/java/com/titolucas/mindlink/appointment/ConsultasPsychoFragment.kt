@@ -17,7 +17,7 @@ import com.titolucas.mindlink.home.viewmodel.HomeViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ConsultasPacienteFragment : Fragment() {
+class ConsultasPsychoFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(HomeRepository())
@@ -38,8 +38,6 @@ class ConsultasPacienteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val container = view.findViewById<LinearLayout>(R.id.consultas_container)
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
         // Observa mudanças nos dados do ViewModel
         viewModel.appointmentCurrentMonth.observe(viewLifecycleOwner) { appointments ->
@@ -49,13 +47,13 @@ class ConsultasPacienteFragment : Fragment() {
                 val card = LayoutInflater.from(context).inflate(R.layout.item_appointment_card, container, false)
 
                 // Referências aos elementos do card
-                val nomePsicoTextView = card.findViewById<TextView>(R.id.nome_psico)
+                val nomePatientTextView = card.findViewById<TextView>(R.id.nome_psico)
                 val statusTextView = card.findViewById<TextView>(R.id.status_consulta)
                 val dataTextView = card.findViewById<TextView>(R.id.data_consulta)
                 val horaTextView = card.findViewById<TextView>(R.id.hora_consulta)
 
                 // Preenchendo os dados no card
-                nomePsicoTextView.text = consulta.professionalName
+                nomePatientTextView.text = consulta.patientName
                 dataTextView.text = "${consulta.appointmentDate.day}/${consulta.appointmentDate.month}/${consulta.appointmentDate.year}"
                 horaTextView.text = String.format(
                     "%02d:%02d",
@@ -84,6 +82,6 @@ class ConsultasPacienteFragment : Fragment() {
 
         // Busca os compromissos do mês do usuário atual
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        userId?.let { viewModel.getAppointmentsByPatientIdInCurrentMonth(it) }
+        userId?.let { viewModel.getAppointmentsByProfessionalIdInCurrentMonth(it) }
     }
 }

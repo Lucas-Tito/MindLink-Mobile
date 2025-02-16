@@ -21,7 +21,8 @@ data class Appointment(
     val patientId: String,
     val professionalName: String,
     val professionalId: String,
-    val appointmentDate: AppointmentDate
+    val appointmentDate: AppointmentDate,
+    val status: String
 )
 
 data class AppointmentDate(
