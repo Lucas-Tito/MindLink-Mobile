@@ -56,9 +56,11 @@ class PatientProfileFragment : Fragment() {
                 val profileImage = view.findViewById<ShapeableImageView>(R.id.picture_profile_patient)
                 val profileName = view.findViewById<TextView>(R.id.name_profile_patient)
                 val bioText = view.findViewById<TextView>(R.id.bio_patient)
+                val emailText = view.findViewById<TextView>(R.id.contact_email)
                 val editProfileButton = view.findViewById<TextView>(R.id.tvEditarPerfil)
 
                 profileName.text = user.name
+                emailText.text = user.email
                 bioText.text = user.bio ?: "Nenhuma bio disponível"
                 Glide.with(this).load(user.photoURL).placeholder(R.drawable.ic_user_placeholder).into(profileImage)
 

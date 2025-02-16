@@ -1,20 +1,21 @@
 package com.titolucas.mindlink.appointment
 
+import android.app.AlertDialog
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
+import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.home.repository.HomeRepository
 import com.titolucas.mindlink.home.viewmodel.HomeViewModel
 import com.titolucas.mindlink.home.viewmodel.HomeViewModelFactory
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ConsultasPsychoFragment : Fragment() {
@@ -23,9 +24,9 @@ class ConsultasPsychoFragment : Fragment() {
         HomeViewModelFactory(HomeRepository())
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var spinnerMonth: Spinner
+    private lateinit var spinnerYear: Spinner
+    private lateinit var consultasContainer: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,51 +38,108 @@ class ConsultasPsychoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val container = view.findViewById<LinearLayout>(R.id.consultas_container)
+        // Inicializa os Spinners e o container dos cards
+        spinnerMonth = view.findViewById(R.id.spinnerMonth)
+        spinnerYear = view.findViewById(R.id.spinnerYear)
+        consultasContainer = view.findViewById(R.id.consultas_container)
+
+        setupMonthSpinner()
+        setupYearSpinner()
 
         // Observa mudanças nos dados do ViewModel
         viewModel.appointmentCurrentMonth.observe(viewLifecycleOwner) { appointments ->
-            container.removeAllViews() // Limpa os cards antes de adicionar novos
-
-            appointments.forEach { consulta ->
-                val card = LayoutInflater.from(context).inflate(R.layout.item_appointment_card, container, false)
-
-                // Referências aos elementos do card
-                val nomePatientTextView = card.findViewById<TextView>(R.id.nome_psico)
-                val statusTextView = card.findViewById<TextView>(R.id.status_consulta)
-                val dataTextView = card.findViewById<TextView>(R.id.data_consulta)
-                val horaTextView = card.findViewById<TextView>(R.id.hora_consulta)
-
-                // Preenchendo os dados no card
-                nomePatientTextView.text = consulta.patientName
-                dataTextView.text = "${consulta.appointmentDate.day}/${consulta.appointmentDate.month}/${consulta.appointmentDate.year}"
-                horaTextView.text = String.format(
-                    "%02d:%02d",
-                    consulta.appointmentDate.hour.toIntOrNull() ?: 0,
-                    consulta.appointmentDate.minutes.toIntOrNull() ?: 0
-                )
-
-                // Define status fixo ou dinâmico conforme lógica necessária
-                val status = consulta.status // Defina um status conforme a necessidade
-                statusTextView.text = status
-
-                // Obtém o background do status
-                val backgroundDrawable = statusTextView.background as? GradientDrawable
-
-                // Define a cor do status
-                when (status) {
-                    "Cancelada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_cancelado, null))
-                    "Agendada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_agendado, null))
-                    "Solicitada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_solicitado, null))
-                }
-
-                // Adiciona o card ao container
-                container.addView(card)
-            }
+            carregarConsultas(appointments)
         }
 
-        // Busca os compromissos do mês do usuário atual
+        // Busca as consultas do mês atual
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let { viewModel.getAppointmentsByProfessionalIdInCurrentMonth(it) }
+    }
+
+    /**
+     * Configura o Spinner de Mês.
+     */
+    private fun setupMonthSpinner() {
+        val meses = listOf(
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        )
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, meses)
+        spinnerMonth.adapter = adapter
+
+        // Define o mês atual como selecionado
+        val mesAtual = Calendar.getInstance().get(Calendar.MONTH)
+        spinnerMonth.setSelection(mesAtual)
+
+        spinnerMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                atualizarConsultas()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    /**
+     * Configura o Spinner de Ano.
+     */
+    private fun setupYearSpinner() {
+        val anoAtual = Calendar.getInstance().get(Calendar.YEAR)
+        val anos = (anoAtual - 5..anoAtual + 5).toList().map { it.toString() } // Define um range de 5 anos antes e 5 anos depois
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, anos)
+        spinnerYear.adapter = adapter
+
+        // Define o ano atual como selecionado
+        spinnerYear.setSelection(anos.indexOf(anoAtual.toString()))
+
+        spinnerYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                atualizarConsultas()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    /**
+     * Atualiza a lista de consultas com base na seleção do mês e ano.
+     */
+    private fun atualizarConsultas() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val mesSelecionado = spinnerMonth.selectedItemPosition + 1 // Janeiro = 0, precisamos somar 1
+        val anoSelecionado = spinnerYear.selectedItem.toString().toInt()
+
+        viewModel.getAppointmentsByUserIdInMonth(userId, mesSelecionado, anoSelecionado)
+    }
+
+    /**
+     * Carrega os cards de consultas dinamicamente.
+     */
+    private fun carregarConsultas(consultas: List<Appointment>) {
+        consultasContainer.removeAllViews() // Limpa os cards antes de adicionar novos
+
+        consultas.forEach { consulta ->
+            val cardView = LayoutInflater.from(context).inflate(R.layout.item_appointment_card, consultasContainer, false)
+
+            // Preenchendo os dados no card
+            cardView.findViewById<TextView>(R.id.nome_psico).text = consulta.professionalName
+            cardView.findViewById<TextView>(R.id.data_consulta).text = "${consulta.appointmentDate.day}/${consulta.appointmentDate.month}/${consulta.appointmentDate.year}"
+            cardView.findViewById<TextView>(R.id.hora_consulta).text = "${consulta.appointmentDate.hour}:${consulta.appointmentDate.minutes}"
+            val statusTextView = cardView.findViewById<TextView>(R.id.status_consulta)
+            statusTextView.text = consulta.status
+
+            // Define a cor do status
+            val backgroundDrawable = statusTextView.background as? GradientDrawable
+            when (consulta.status) {
+                "Cancelada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_cancelado, null))
+                "Agendada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_agendado, null))
+                "Solicitada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_solicitado, null))
+            }
+
+            // Adiciona o card ao container
+            consultasContainer.addView(cardView)
+        }
     }
 }

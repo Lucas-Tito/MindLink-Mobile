@@ -19,17 +19,12 @@ import retrofit2.http.Body
 
 interface ApiService {
 
+    //Users
     @GET("users")
     suspend fun getAllUsers(): List<UserResponse>
 
     @GET("users/{id}")
     suspend fun getUserById(@Path("id") userId: String): UserResponse
-
-    @GET("appointments/currentmonthprofessional/{id}")
-    suspend fun getAppointmentsByProfessionalIdInCurrentMonth(@Path("id") professionalId: String): List<Appointment>
-
-    @GET("appointments/currentmonthpatient/{id}")
-    suspend fun getAppointmentsByPatientIdInCurrentMonth(@Path("id") patientId: String): List<Appointment>
 
     @GET("users/checkIfIsProfessional/{id}")
     suspend fun checkIfUserIsProfessional(@Path("id") userId: String): Boolean
@@ -43,18 +38,37 @@ interface ApiService {
     @GET("searchPsyco")
     suspend fun searchPsychologists(@Query("q") query: String): List<UserResponse>
 
+    //appointments
+
+    @GET("appointments/currentmonthprofessional/{id}")
+    suspend fun getAppointmentsByProfessionalIdInCurrentMonth(@Path("id") professionalId: String): List<Appointment>
+
+    @GET("appointments/currentmonthpatient/{id}")
+    suspend fun getAppointmentsByPatientIdInCurrentMonth(@Path("id") patientId: String): List<Appointment>
+
+    @POST("appointment")
+    suspend fun createAppointment(@Body appointmentRequest: AppointmentRequest): List<AvailabilityResponse>
+
+    @GET("appointments/getByIdAndMonth/{id}")
+    suspend fun getAppointmentsByUserIdInMonth(
+        @Path("id") userId: String,
+        @Query("month") month: Int,
+        @Query("year") year: Int
+    ): List<Appointment>
+
+
+    //availability
     @POST("availability")
     fun postAvailability(@Body body: AvailabilityRequest): Call<Void>
 
     @GET("availability/{userId}")
     suspend fun getAvailability(@Path("userId") userId: String): List<AvailabilityResponse>
 
-    @POST("appointment")
-    suspend fun createAppointment(@Body appointmentRequest: AppointmentRequest): List<AvailabilityResponse>
-
     @GET("availability/{id}")
     suspend fun getAvailabilityByUserId(@Path("id") userId: String): List<AvailabilityRequest>
 
+
+    //messages
     @GET("messages/conversations/{userId}/{contactId}")
     suspend fun getConversationsByUserId(@Path("userId") userId: String, @Path("contactId") contactId: String): List<ConversationsRequest>
 
