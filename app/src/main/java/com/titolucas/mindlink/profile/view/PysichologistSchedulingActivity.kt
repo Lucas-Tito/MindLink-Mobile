@@ -20,12 +20,14 @@ import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.AppointmentDateTime
 import com.titolucas.mindlink.generalData.AppointmentRequest
 import com.titolucas.mindlink.generalData.AvailabilityResponse
-import com.titolucas.mindlink.generalData.TimeSlot
+import com.titolucas.mindlink.generalData.EndTime
+import com.titolucas.mindlink.generalData.StartTime
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.network.RetrofitInstance
 import com.titolucas.mindlink.profile.repository.ProfileRepository
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
+import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import com.applandeo.materialcalendarview.CalendarView as MaterialCalendarView
@@ -79,17 +81,23 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
     private fun fetchAvailability(professionalId: String) {
         lifecycleScope.launch {
             try {
-                val response: List<Map<String, Any>> = RetrofitInstance.apiService.getAvailability(professionalId)
+                val response: List<AvailabilityResponse> = RetrofitInstance.apiService.getAvailability(professionalId)
                 println("availability response: "+ response)
                 // Convertendo manualmente o JSON para AvailabilityResponse
-                val availabilityList = response.mapNotNull { map ->
+                val availabilityList = response.mapNotNull { response ->
                     try {
                         AvailabilityResponse(
-                            professionalId = map["professionalId"] as? String ?: "",
-                            dayOfWeek = map["dayOfWeek"] as? String ?: "",
-                            startTime = parseTime(map["startTime"] as? Map<String, Any>),
-                            endTime = parseTime(map["endTime"] as? Map<String, Any>),
-                            availabilityId = map["availabilityId"] as? String ?: ""
+                            professionalId = response.professionalId.toString(),
+                            dayOfWeek = response.dayOfWeek,
+                            startTime = StartTime(
+                                startHour = response.startTime.startHour  as? String ?: "00",
+                                startMinute = response.startTime.startMinute as? String ?: "00"
+                            ),
+                            endTime = EndTime(
+                                endHour = response.endTime.endHour  as? String ?: "00",
+                                endMinute = response.endTime.endMinute as? String ?: "00"
+                            ),
+                            availabilityId = response.availabilityId as? String ?: ""
                         )
                     } catch (e: Exception) {
                         null // Se falhar, ignora essa entrada
@@ -108,7 +116,7 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
         availableTimes.clear()
         for (availability in availabilities) {
             val formattedDate = formatDayOfWeek(availability.dayOfWeek)
-            val timeRange = "${availability.startTime.hour}:${availability.startTime.minute}"
+            val timeRange = "${availability.startTime.startHour}:${availability.startTime.startMinute}"
 
             availableTimes[formattedDate] = availableTimes.getOrDefault(formattedDate, listOf()) + timeRange
         }
@@ -219,12 +227,9 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
                 try {
                     val response = RetrofitInstance.apiService.createAppointment(appointmentRequest)
 
-                    if (response.isSuccessful) {
+                    if (!response.isNullOrEmpty()) {
                         Toast.makeText(this@PysichologistSchedulingActivity, "Consulta Agendada!", Toast.LENGTH_LONG).show()
                         finish()
-                    } else {
-                        val errorMessage = response.errorBody()?.string() ?: "Erro desconhecido"
-                        Toast.makeText(this@PysichologistSchedulingActivity, "Erro ao agendar consulta: $errorMessage", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     println("Erro: ${e.message}, Caminho: ${e.stackTrace}")
@@ -256,10 +261,5 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
         }
     }
 
-    private fun parseTime(timeMap: Map<String, Any>?): TimeSlot {
-        return TimeSlot(
-            hour = timeMap?.get("startHour") as? String ?: "00",
-            minute = timeMap?.get("startMinute") as? String ?: "00"
-        )
-    }
+
 }

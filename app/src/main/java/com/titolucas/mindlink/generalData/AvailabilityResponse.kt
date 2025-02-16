@@ -3,13 +3,18 @@ package com.titolucas.mindlink.generalData
 data class AvailabilityResponse(
     val professionalId: String,
     val dayOfWeek: String,
-    val startTime: TimeSlot,
-    val endTime: TimeSlot,
+    val startTime: StartTime,
+    val endTime: EndTime,
     val availabilityId: String
 )
 
 
-data class TimeSlot(
-    val hour: String,
-    val minute: String
+data class StartTime(
+    val startHour: String,
+    val startMinute: String,
+)
+
+data class EndTime(
+    val endHour: String,
+    val endMinute: String,
 )

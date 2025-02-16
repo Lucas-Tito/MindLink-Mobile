@@ -151,7 +151,7 @@ class ServiceHours : AppCompatActivity() {
         if (userId != null) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val availabilityList = apiService.getAvailabilityByUserId(userId)
+                    val availabilityList = apiService.getAvailability(userId)
                     withContext(Dispatchers.Main) {
                         availabilityList.forEach { availability ->
                             val card = LayoutInflater.from(this@ServiceHours).inflate(R.layout.item_service_hours, container, false)
@@ -161,7 +161,7 @@ class ServiceHours : AppCompatActivity() {
                             val dataTextView = card.findViewById<TextView>(R.id.data)
                             val horaTextView = card.findViewById<TextView>(R.id.hora)
 
-                            diaTextView.text = availability.dayOfWeek
+                            diaTextView.text = availability.dayOfWeek;
                             dataTextView.text = dateFormat.format(Calendar.getInstance().time) // Ajuste conforme necessário
                             horaTextView.text = "${availability.startTime.startHour}:${availability.startTime.startMinute} - ${availability.endTime.endHour}:${availability.endTime.endMinute}"
 
