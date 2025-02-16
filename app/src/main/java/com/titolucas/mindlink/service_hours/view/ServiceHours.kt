@@ -47,6 +47,11 @@ class ServiceHours : AppCompatActivity() {
             insets
         }
 
+        val returnButton = findViewById<ImageButton>(R.id.service_hours_return_button)
+        returnButton.setOnClickListener {
+            finish()
+        }
+
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 
         val showBottomSheetButton = findViewById<ImageButton>(R.id.showBottomSheet)
@@ -64,11 +69,6 @@ class ServiceHours : AppCompatActivity() {
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 dayInput.adapter = adapter
-            }
-
-            val returnButton = findViewById<ImageButton>(R.id.service_hours_return_button)
-            returnButton.setOnClickListener {
-                finish()
             }
 
             // Declarar os inputs e botões
