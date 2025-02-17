@@ -16,6 +16,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 
 interface ApiService {
 
@@ -48,6 +49,12 @@ interface ApiService {
 
     @POST("appointment")
     suspend fun createAppointment(@Body appointmentRequest: AppointmentRequest): List<AvailabilityResponse>
+
+    @PATCH("appointment/{id}")
+    suspend fun updateAppointmentStatus(
+        @Path("id") appointmentId: String,
+        @Body status:  Map<String, String>
+    ): Response<Void>
 
     @GET("appointments/getByIdAndMonth/{id}")
     suspend fun getAppointmentsByUserIdInMonth(

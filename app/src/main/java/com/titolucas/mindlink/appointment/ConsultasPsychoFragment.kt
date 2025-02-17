@@ -27,6 +27,7 @@ class ConsultasPsychoFragment : Fragment() {
     private lateinit var spinnerMonth: Spinner
     private lateinit var spinnerYear: Spinner
     private lateinit var consultasContainer: LinearLayout
+    private var isPsychologist: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +50,15 @@ class ConsultasPsychoFragment : Fragment() {
         // Observa mudanças nos dados do ViewModel
         viewModel.appointmentCurrentMonth.observe(viewLifecycleOwner) { appointments ->
             carregarConsultas(appointments)
+        }
+
+        viewModel.updateStatusResult.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Toast.makeText(requireContext(), "Consulta atualizada com sucesso!", Toast.LENGTH_SHORT).show()
+                atualizarConsultas() // ✅ Atualiza a lista de consultas
+            } else {
+                Toast.makeText(requireContext(), "Erro ao atualizar consulta", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Busca as consultas do mês atual
@@ -138,8 +148,45 @@ class ConsultasPsychoFragment : Fragment() {
                 "Solicitada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_solicitado, null))
             }
 
+            val optionsButton = cardView.findViewById<ImageView>(R.id.imageView)
+            optionsButton.setOnClickListener {
+                showOptionsDialog(consulta)
+            }
+
             // Adiciona o card ao container
             consultasContainer.addView(cardView)
         }
     }
+
+    private fun showOptionsDialog(consulta: Appointment) {
+        val options = mutableListOf<String>()
+
+        // Adiciona "Aceitar Consulta" apenas se for psicólogo e status for "Solicitada"
+        if (isPsychologist && consulta.status == "Solicitada") {
+            options.add("Aceitar Consulta")
+        }
+        options.add("Cancelar Consulta")
+
+        // Se a consulta já estiver cancelada, apenas informa o usuário
+        if (consulta.status == "Cancelada") {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Ação indisponível")
+                .setMessage("Esta consulta já foi cancelada e não pode ser modificada.")
+                .setPositiveButton("OK", null)
+                .show()
+            return // ✅ Sai do método para evitar execução desnecessária
+        }
+
+        // Exibe as opções disponíveis para o usuário
+        AlertDialog.Builder(requireContext())
+            .setTitle("Escolha uma ação")
+            .setItems(options.toTypedArray()) { _, which ->
+                when (options[which]) {
+                    "Aceitar Consulta" -> viewModel.updateAppointmentStatus(consulta.id, "Agendada")
+                    "Cancelar Consulta" -> viewModel.updateAppointmentStatus(consulta.id, "Cancelada")
+                }
+            }
+            .show()
+    }
+
 }

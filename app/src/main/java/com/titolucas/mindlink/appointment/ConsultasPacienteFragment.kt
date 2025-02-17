@@ -1,5 +1,6 @@
 package com.titolucas.mindlink.appointment
 
+import android.app.AlertDialog
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,16 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.home.repository.HomeRepository
 import com.titolucas.mindlink.home.viewmodel.HomeViewModel
 import com.titolucas.mindlink.home.viewmodel.HomeViewModelFactory
+import com.titolucas.mindlink.network.RetrofitInstance
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +36,7 @@ class ConsultasPacienteFragment : Fragment() {
     private lateinit var spinnerMonth: Spinner
     private lateinit var spinnerYear: Spinner
     private lateinit var consultasContainer: LinearLayout
+    private var isPsychologist: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +59,15 @@ class ConsultasPacienteFragment : Fragment() {
         // Observa mudanças nos dados do ViewModel
         viewModel.appointmentCurrentMonth.observe(viewLifecycleOwner) { appointments ->
             carregarConsultas(appointments)
+        }
+
+        viewModel.updateStatusResult.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Toast.makeText(requireContext(), "Consulta atualizada com sucesso!", Toast.LENGTH_SHORT).show()
+                atualizarConsultas() // ✅ Atualiza a lista de consultas
+            } else {
+                Toast.makeText(requireContext(), "Erro ao atualizar consulta", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Busca as consultas do mês atual
@@ -141,8 +157,40 @@ class ConsultasPacienteFragment : Fragment() {
                 "Solicitada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_solicitado, null))
             }
 
+            val optionsButton = cardView.findViewById<ImageView>(R.id.imageView)
+            optionsButton.setOnClickListener {
+                showOptionsDialog(consulta)
+            }
+
             // Adiciona o card ao container
             consultasContainer.addView(cardView)
+        }
+    }
+
+    private fun showOptionsDialog(consulta: Appointment) {
+        val options = mutableListOf<String>()
+
+        if (isPsychologist && consulta.status == "Solicitada") {
+            options.add("Aceitar Consulta")
+        }
+        options.add("Cancelar Consulta")
+
+        if (consulta.status == "Cancelada") {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Não há ações disponíveis")
+                .setMessage("Esta consulta já foi cancelada e não pode ser modificada.")
+                .setPositiveButton("OK", null)
+                .show()
+        } else {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Escolha uma ação")
+                .setItems(options.toTypedArray()) { _, which ->
+                    when (options[which]) {
+                        "Aceitar Consulta" -> viewModel.updateAppointmentStatus(consulta.id, "Agendada")
+                        "Cancelar Consulta" -> viewModel.updateAppointmentStatus(consulta.id, "Cancelada")
+                    }
+                }
+                .show()
         }
     }
 }
