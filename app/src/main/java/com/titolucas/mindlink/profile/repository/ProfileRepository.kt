@@ -5,7 +5,10 @@ import com.titolucas.mindlink.generalData.AvailabilityResponse
 import com.titolucas.mindlink.generalData.EndTime
 import com.titolucas.mindlink.generalData.StartTime
 
+//import com.titolucas.mindlink.generalData.TimeSlot
+import android.util.Log
 import com.titolucas.mindlink.profile.data.UserRequest
+import com.titolucas.mindlink.generalData.UpdateUserResponse
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.network.RetrofitInstance
 
@@ -59,4 +62,10 @@ class ProfileRepository {
         }
     }
 
+    suspend fun updateUser(userId: String, updates: Map<String, Any>): UpdateUserResponse {
+        Log.d("ProfileRepository", "Chamando updateUser com userId: $userId, updates: $updates")
+        val response = apiService.updateUser(userId, updates)
+        Log.d("ProfileRepository", "Resposta do updateUser: $response")
+        return response
+    }
 }

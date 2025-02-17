@@ -2,6 +2,7 @@ package com.titolucas.mindlink.network
 
 import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.generalData.AppointmentRequest
+import com.titolucas.mindlink.generalData.UpdateUserResponse
 import com.titolucas.mindlink.generalData.AvailabilityResponse
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.messages.data.ConversationsRequest
@@ -13,6 +14,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PATCH
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Body
@@ -78,4 +80,9 @@ interface ApiService {
     @POST("messages")
     suspend fun createMessage(@Body messageRequest: MessageRequest): Response<Void>
 
+    @PATCH("users/{id}")
+    suspend fun updateUser(
+        @Path("id") userId: String,
+        @Body updates: @JvmSuppressWildcards Map<String, Any>
+    ): UpdateUserResponse
 }
