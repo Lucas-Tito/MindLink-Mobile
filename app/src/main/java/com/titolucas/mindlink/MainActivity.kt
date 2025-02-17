@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         Log.i("", "Entrou no fluxo do paciente")
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-
+        val isProfessionalType = false
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             val args = Bundle().apply {
                 putString("USER_ID", userId)
+                putBoolean("isProfessionalType",isProfessionalType)
             }
 
             val itemId: Int = it.getItemId()

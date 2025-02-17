@@ -20,6 +20,9 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
     private val _appointmentCurrentMonth = MutableLiveData<List<Appointment>>()
     val appointmentCurrentMonth: LiveData<List<Appointment>> get() = _appointmentCurrentMonth
 
+    private val _updateStatusResult = MutableLiveData<Boolean>()
+    val updateStatusResult: LiveData<Boolean> get() = _updateStatusResult
+
     fun loadProfessionalUsers() {
         viewModelScope.launch {
             val results = repository.getProfessionalUsers()
@@ -85,6 +88,18 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
             } catch (e: Exception) {
                 println("Erro inesperado: ${e.message}")
                 _appointmentCurrentMonth.postValue(emptyList()) // Garante que o calendário não fique sem atualização
+            }
+        }
+    }
+
+    fun updateAppointmentStatus(appointmentId: String, newStatus: String) {
+        viewModelScope.launch {
+            try {
+                repository.updateAppointmentStatus(appointmentId,  mapOf("status" to newStatus))
+                _updateStatusResult.postValue(true)
+
+            } catch (e: Exception) {
+                _updateStatusResult.postValue(false)
             }
         }
     }

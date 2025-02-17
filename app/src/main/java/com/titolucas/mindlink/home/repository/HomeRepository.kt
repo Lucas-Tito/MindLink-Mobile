@@ -25,4 +25,13 @@ class HomeRepository {
     suspend fun getAppointmentsByUserIdInMonth(userId: String,selectedMonth: Int , selectedYear: Int): List<Appointment> {
         return apiService.getAppointmentsByUserIdInMonth(userId,selectedMonth,selectedYear)
     }
+
+    suspend fun updateAppointmentStatus(appointmentId: String, newStatus: Map<String, String>): Boolean {
+        return try {
+            val response = RetrofitInstance.apiService.updateAppointmentStatus(appointmentId, newStatus)
+            response.isSuccessful
+        } catch (e: Exception) {
+            false
+        }
+    }
 }
