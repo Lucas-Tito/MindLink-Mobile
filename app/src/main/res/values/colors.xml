@@ -8,7 +8,7 @@
     <color name="status_solicitado">#262626</color> <!-- Preto -->
 
     <color name="horários_disponives">#0AA41F</color> <!-- Verde escuro-->
-    <color name="horarios_dia">#EEEEEF</color> <!-- Verde escuro-->
+    <color name="horarios_dia">#2196F3</color> <!-- azul-->
     <color name="dia_disponivel">#FFD700</color> <!-- Amarelo chamativo -->
 
 </resources>

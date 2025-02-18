@@ -16,11 +16,14 @@ import com.applandeo.materialcalendarview.listeners.OnCalendarDayClickListener
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
 import com.titolucas.mindlink.R
+import com.titolucas.mindlink.generalData.Appointment
 import com.titolucas.mindlink.generalData.AppointmentDateTime
 import com.titolucas.mindlink.generalData.AppointmentRequest
 import com.titolucas.mindlink.generalData.AvailabilityResponse
 import com.titolucas.mindlink.generalData.EndTime
+import com.titolucas.mindlink.generalData.ServerResponse
 import com.titolucas.mindlink.generalData.StartTime
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.network.RetrofitInstance
@@ -29,7 +32,9 @@ import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
 import com.titolucas.mindlink.service_hours.data.AvailabilityRequest
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 import com.applandeo.materialcalendarview.CalendarView as MaterialCalendarView
 
 class PysichologistSchedulingActivity : AppCompatActivity() {
@@ -114,11 +119,21 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
 
     private fun updateAvailableTimes(availabilities: List<AvailabilityResponse>) {
         availableTimes.clear()
+
         for (availability in availabilities) {
-            val formattedDate = formatDayOfWeek(availability.dayOfWeek)
+            // Obtém todas as datas do ano para aquele dia da semana
+            val formattedDates = getDatesForDayOfWeek(
+                availability.dayOfWeek,
+                Calendar.getInstance().get(Calendar.YEAR)
+            )
+
+            // Formata o horário disponível
             val timeRange = "${availability.startTime.startHour}:${availability.startTime.startMinute}"
 
-            availableTimes[formattedDate] = availableTimes.getOrDefault(formattedDate, listOf()) + timeRange
+            // Adiciona o horário para cada data encontrada
+            for (date in formattedDates) {
+                availableTimes[date] = availableTimes.getOrDefault(date, listOf()) + timeRange
+            }
         }
 
         setupCalendar()
@@ -226,14 +241,22 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     val response = RetrofitInstance.apiService.createAppointment(appointmentRequest)
+                    println(response.body().toString())
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@PysichologistSchedulingActivity, "Consulta agendada com sucesso!", Toast.LENGTH_LONG).show()
+                    } else {
+                        val errorBody = response.errorBody()?.string()
 
-                    if (!response.isNullOrEmpty()) {
-                        Toast.makeText(this@PysichologistSchedulingActivity, "Consulta Agendada!", Toast.LENGTH_LONG).show()
-                        finish()
+                        if (!errorBody.isNullOrEmpty()) {
+                            val gson = Gson()
+                            val errorResponse: ServerResponse = gson.fromJson(errorBody, ServerResponse::class.java)
+                            Toast.makeText(this@PysichologistSchedulingActivity, errorResponse.message ?: "Erro desconhecido", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this@PysichologistSchedulingActivity, "Erro desconhecido no servidor", Toast.LENGTH_LONG).show()
+                        }
                     }
                 } catch (e: Exception) {
-                    println("Erro: ${e.message}, Caminho: ${e.stackTrace}")
-                    Toast.makeText(this@PysichologistSchedulingActivity, "Erro ao se conectar com a API.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@PysichologistSchedulingActivity, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -252,13 +275,44 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
         )
     }
 
-    private fun formatDayOfWeek(dayOfWeek: String): String {
-        return when (dayOfWeek) {
-            "Sunday" -> "25-02-2025"
-            "Monday" -> "26-02-2025"
-            "Tuesday" -> "27-02-2025"
-            else -> ""
+    private fun getDatesForDayOfWeek(dayOfWeek: String, year: Int): List<String> {
+        val dates = mutableListOf<String>()
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+        // Define o ano e começa no primeiro dia do ano
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.DAY_OF_YEAR, 1)
+
+        // Mapeia o nome do dia para o número correspondente (Calendar.SUNDAY, MONDAY, etc.)
+        val dayMap = mapOf(
+            "Sunday" to Calendar.SUNDAY,
+            "Monday" to Calendar.MONDAY,
+            "Tuesday" to Calendar.TUESDAY,
+            "Wednesday" to Calendar.WEDNESDAY,
+            "Thursday" to Calendar.THURSDAY,
+            "Friday" to Calendar.FRIDAY,
+            "Saturday" to Calendar.SATURDAY
+        )
+
+        // Obtém o número do dia correspondente
+        val targetDay = dayMap[dayOfWeek] ?: return emptyList()
+
+        // Obtém a data atual
+        val today = Calendar.getInstance()
+
+        // Avança para o primeiro dia da semana correspondente no ano
+        while (calendar.get(Calendar.YEAR) == year) {
+            if (calendar.get(Calendar.DAY_OF_WEEK) == targetDay) {
+                // Adiciona apenas se a data for igual ou posterior à data atual
+                if (!calendar.before(today)) {
+                    dates.add(dateFormat.format(calendar.time))
+                }
+            }
+            calendar.add(Calendar.DAY_OF_YEAR, 1) // Avança um dia
         }
+
+        return dates
     }
 
 
