@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".profile.view.ProfileFragment">
 
     <LinearLayout
@@ -11,13 +12,14 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Foto de Perfil -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="32dp">
 
-            <!-- Foto de Perfil -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/picture_profile_psichologist_edit"
                 android:layout_width="120dp"
@@ -27,245 +29,212 @@
                 app:shapeAppearanceOverlay="@style/CircleImage"
                 tools:src="@drawable/sena" />
 
-            <!-- Botão de Editar -->
             <ImageButton
                 android:id="@+id/btnEditPhoto"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignEnd="@id/picture_profile_psichologist_edit"
                 android:layout_alignBottom="@id/picture_profile_psichologist_edit"
-                android:layout_marginEnd="-27dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="-20dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Editar foto"
                 android:src="@drawable/editbutton"
                 app:tint="#3FAB98" />
         </RelativeLayout>
 
-        <!-- Nome -->
+        <!-- Campos Editáveis -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="6dp"
-            >
+            android:layout_marginTop="24dp">
 
-            <!-- Título Nome -->
-            <TextView
-                android:id="@+id/tvTitleName"
+            <!-- Nome -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Nome"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
-        <!-- Sobrenome -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Título Sobrenome -->
-            <TextView
-                android:id="@+id/tvTitleLastName"
+            <!-- Sobrenome -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sobrenome"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Sobrenome"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
-        <!-- Título -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Título Título -->
-            <TextView
-                android:id="@+id/tvTitle"
+            <!-- Título -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Título"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Título"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
-        <!-- Educação -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Título Educação -->
-            <TextView
-                android:id="@+id/tvTitleEducation"
+            <!-- Educação -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Educação"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputEducation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Educação"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
-        <!-- Bio -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEducation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Título Bio -->
-            <TextView
-                android:id="@+id/tvTitleBio"
+            <!-- Bio -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bio"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputBio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Bio"
-                android:inputType="textMultiLine"
-                android:minLines="1"
-                android:gravity="top"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
-        <!-- Email -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Título Email -->
-            <TextView
-                android:id="@+id/tvTitleEmail"
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
 
-        <!-- Senha -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="6dp"
-            android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Título Senha -->
-            <TextView
-                android:id="@+id/tvTitlePassword"
+            <!-- Senha -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Senha"
-                android:inputType="textPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botão Salvar -->
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar"
+                android:backgroundTint="#3FAB98"
+                android:textColor="@android:color/white"
                 android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
+                android:layout_marginTop="24dp"
+                android:padding="12dp"
+                android:layout_marginBottom="6dp" />
+
+            <!-- Botão Cancelar -->
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF5E2F"
+                android:text="Cancelar"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:padding="12dp" />
         </LinearLayout>
-
-        <!-- Botão Salvar -->
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salvar"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#3FAB98"
-            android:textColor="@android:color/white" />
-
-        <!-- Botão Cancelar -->
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#FF5E2F"
-            android:text="Cancel" />
-
     </LinearLayout>
 </ScrollView>

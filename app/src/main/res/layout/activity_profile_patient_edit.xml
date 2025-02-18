@@ -25,7 +25,9 @@
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/CircleImage"
-                tools:src="@drawable/sena" />
+                tools:src="@drawable/sena"
+                app:strokeColor="#44AE9B"
+                app:strokeWidth="1dp" />
 
             <!-- Botão de Editar -->
             <ImageButton
@@ -51,24 +53,28 @@
             android:layout_marginHorizontal="6dp">
 
             <!-- Título Nome -->
-            <TextView
-                android:id="@+id/tvTitlePatientName"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputPatientName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Nome"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                android:layout_marginTop="20dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPatientName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    android:textColorHint="#A9A5A9"
+                    android:paddingLeft="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!-- Sobrenome -->
@@ -80,24 +86,28 @@
             android:layout_marginTop="16dp">
 
             <!-- Título Sobrenome -->
-            <TextView
-                android:id="@+id/tvTitlePatientLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sobrenome"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
 
-            <EditText
-                android:id="@+id/inputPatientLastName"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Sobrenome"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPatientLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    android:textColorHint="#A9A5A9"
+                    android:paddingLeft="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!-- Bio -->
@@ -109,26 +119,29 @@
             android:layout_marginTop="16dp">
 
             <!-- Título Bio -->
-            <TextView
-                android:id="@+id/tvTitlePatientBio"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bio"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
-
-            <EditText
-                android:id="@+id/inputPatientBio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Bio"
-                android:inputType="textMultiLine"
-                android:minLines="1"
-                android:gravity="top"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPatientBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:textSize="16sp"
+                    android:textColorHint="#A9A5A9"
+                    android:paddingLeft="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!-- Email -->
@@ -140,24 +153,28 @@
             android:layout_marginTop="16dp">
 
             <!-- Título Email -->
-            <TextView
-                android:id="@+id/tvTitlePatientEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
 
-            <EditText
-                android:id="@+id/inputPatientEmail"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPatientEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textSize="16sp"
+                    android:textColorHint="#A9A5A9"
+                    android:paddingLeft="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!-- Senha -->
@@ -169,24 +186,28 @@
             android:layout_marginTop="16dp">
 
             <!-- Título Senha -->
-            <TextView
-                android:id="@+id/tvTitlePatientPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Senha"
-                android:textSize="14sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium" />
 
-            <EditText
-                android:id="@+id/inputPatientPassword"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:hint="Senha"
-                android:inputType="textPassword"
-                android:textSize="16sp"
-                android:textColorHint="#A9A5A9"
-                android:paddingLeft="5dp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPatientPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textSize="16sp"
+                    android:textColorHint="#A9A5A9"
+                    android:paddingLeft="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!-- Botão Salvar -->
@@ -198,6 +219,7 @@
             android:layout_marginTop="24dp"
             android:backgroundTint="#3FAB98"
             android:textColor="@android:color/white" />
+
         <!-- Botão Cancelar -->
         <Button
             android:id="@+id/btnCancelPatient"
@@ -205,7 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:backgroundTint="#FF5E2F"
-            android:text="Cancel" />
+            android:text="Cancelar" />
 
     </LinearLayout>
 </ScrollView>
