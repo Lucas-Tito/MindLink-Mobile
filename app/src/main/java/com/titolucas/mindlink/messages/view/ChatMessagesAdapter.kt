@@ -10,7 +10,7 @@ import com.titolucas.mindlink.R
 import com.titolucas.mindlink.messages.data.MessageRequest
 import com.titolucas.mindlink.messages.utils.DateUtils
 
-class ChatMessagesAdapter(private val messages: List<MessageRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatMessagesAdapter(private val messages: MutableList<MessageRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_SENT = 1
@@ -49,7 +49,7 @@ class ChatMessagesAdapter(private val messages: List<MessageRequest>) : Recycler
     override fun getItemCount() = messages.size
 
     class SentMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val messageText: TextView = itemView.findViewById(R.id.message_received)
+        val messageText: TextView = itemView.findViewById(R.id.message_sent)
         val messageCreatedAt: TextView = itemView.findViewById(R.id.messageCreatedAt)
     }
 

@@ -49,7 +49,7 @@ interface ApiService {
     suspend fun getAppointmentsByPatientIdInCurrentMonth(@Path("id") patientId: String): List<Appointment>
 
     @POST("appointment")
-    suspend fun createAppointment(@Body appointmentRequest: AppointmentRequest): List<AvailabilityResponse>
+    suspend fun createAppointment(@Body appointmentRequest: AppointmentRequest): Response<Any>
 
     @PATCH("appointment/{id}")
     suspend fun updateAppointmentStatus(

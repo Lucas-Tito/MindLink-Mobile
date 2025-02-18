@@ -6,14 +6,14 @@ import java.util.Locale
 import java.text.ParseException
 
 object DateUtils {
-    fun formatDate(isoDateString: String): String {
+    fun formatDate(timestamp: Long): String {
         return try {
-            val isoFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val date = isoFormat.parse(isoDateString)
-            val sdf = SimpleDateFormat("h:mma", Locale.getDefault())
+            val date = Date(timestamp) // Converte o timestamp em uma Data
+            val sdf = SimpleDateFormat("h:mma", Locale.getDefault()) // Exemplo: "10:30PM"
             sdf.format(date)
-        } catch (e: ParseException) {
+        } catch (e: Exception) {
             "Invalid date"
         }
     }
+
 }

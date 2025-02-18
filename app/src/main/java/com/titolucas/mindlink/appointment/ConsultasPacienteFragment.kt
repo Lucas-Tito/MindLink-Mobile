@@ -186,8 +186,8 @@ class ConsultasPacienteFragment : Fragment() {
                 .setTitle("Escolha uma ação")
                 .setItems(options.toTypedArray()) { _, which ->
                     when (options[which]) {
-                        "Aceitar Consulta" -> viewModel.updateAppointmentStatus(consulta.id, "Agendada")
-                        "Cancelar Consulta" -> viewModel.updateAppointmentStatus(consulta.id, "Cancelada")
+                        "Aceitar Consulta" -> viewModel.updateAppointmentStatus(consulta.appointmentId, "Agendada")
+                        "Cancelar Consulta" -> viewModel.updateAppointmentStatus(consulta.appointmentId, "Cancelada")
                     }
                 }
                 .show()

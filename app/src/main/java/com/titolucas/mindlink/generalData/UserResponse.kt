@@ -15,7 +15,7 @@ data class UserResponse(
 )
 
 data class Appointment(
-    val id: String,
+    val appointmentId: String,
     val patientName: String,
     val patientId: String,
     val professionalName: String,
@@ -31,5 +31,11 @@ data class AppointmentDate(
     val day: Int,
     val year: Int,
     val month: Int
+)
+
+data class ServerResponse(
+    val status: String,  // Exemplo: "Consulta criada com sucesso!"
+    val message: String?, // Se a consulta for criada, retorna o ID
+    val appointmentId: String?
 )
 
