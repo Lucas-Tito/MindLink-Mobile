@@ -93,7 +93,7 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
                     try {
                         AvailabilityResponse(
                             professionalId = response.professionalId.toString(),
-                            dayOfWeek = response.dayOfWeek,
+                            dayOfWeek = traduzirDiaParaIngles(response.dayOfWeek),
                             startTime = StartTime(
                                 startHour = response.startTime.startHour  as? String ?: "00",
                                 startMinute = response.startTime.startMinute as? String ?: "00"
@@ -313,6 +313,19 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
         }
 
         return dates
+    }
+
+    fun traduzirDiaParaIngles(diaSemana: String): String {
+        return when (diaSemana.lowercase()) {
+            "domingo" -> "Sunday"
+            "Segunda-feira" -> "Monday"
+            "Terça-feira" -> "Tuesday"
+            "Quarta-feira" -> "Wednesday"
+            "Quinta-feira" -> "Thursday"
+            "Sexta-feira" -> "Friday"
+            "Sábado" -> "Saturday"
+            else -> "${diaSemana}"
+        }
     }
 
 

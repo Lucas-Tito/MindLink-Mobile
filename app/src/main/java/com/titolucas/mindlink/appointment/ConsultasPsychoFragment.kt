@@ -49,8 +49,17 @@ class ConsultasPsychoFragment : Fragment() {
 
         // Observa mudanças nos dados do ViewModel
         viewModel.appointmentCurrentMonth.observe(viewLifecycleOwner) { appointments ->
+            println("📌 Antes de chamar carregarConsultas: $appointments")
+            appointments.forEach { appointment ->
+                if(appointment.appointmentId == null){
+                    println("📌 AppointmentId recebido null: $appointment");
+                    return@forEach
+                }
+
+            }
             carregarConsultas(appointments)
         }
+
 
         viewModel.updateStatusResult.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
@@ -132,7 +141,10 @@ class ConsultasPsychoFragment : Fragment() {
 
         consultas.forEach { consulta ->
             val cardView = LayoutInflater.from(context).inflate(R.layout.item_appointment_card, consultasContainer, false)
-
+            if(consulta.appointmentId == null){
+                println("📌 AppointmentId consulta carregada: $consulta");
+                //return@forEach
+            }
             // Preenchendo os dados no card
             cardView.findViewById<TextView>(R.id.nome_psico).text = consulta.professionalName
             cardView.findViewById<TextView>(R.id.data_consulta).text = "${consulta.appointmentDate.day}/${consulta.appointmentDate.month}/${consulta.appointmentDate.year}"
@@ -160,7 +172,7 @@ class ConsultasPsychoFragment : Fragment() {
 
     private fun showOptionsDialog(consulta: Appointment) {
         val options = mutableListOf<String>()
-
+        println("Consulta: "+ consulta)
         // Adiciona "Aceitar Consulta" apenas se for psicólogo e status for "Solicitada"
         if (isPsychologist && consulta.status == "Solicitada") {
             options.add("Aceitar Consulta")

@@ -40,7 +40,15 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 val appointments = repository.getAppointmentsByProfessionalIdInCurrentMonth(professionalId)
-                _appointmentCurrentMonth.postValue(appointments) // Atualiza a UI com os resultados
+                println("appointments viewmodel: "+appointments)
+                val updatedAppointments = appointments.map {
+                    it.copy(appointmentId = it.appointmentId)
+                }
+
+                println("🔵 Atualizando LiveData com: $updatedAppointments")
+                _appointmentCurrentMonth.postValue(updatedAppointments)
+                println("appnt current viewmodel"+appointmentCurrentMonth.value)
+                _appointmentCurrentMonth.value?.forEach { println("📌 $it") }// Atualiza a UI com os resultados
             } catch (e: retrofit2.HttpException) {
                 if (e.code() == 404) {
                     println("Nenhum compromisso encontrado (Erro 404)")
@@ -52,6 +60,8 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
                 println("Erro inesperado: ${e.message}")
                 _appointmentCurrentMonth.postValue(emptyList()) // Garante que o calendário não fique sem atualização
             }
+
+
         }
     }
     fun getAppointmentsByPatientIdInCurrentMonth(patientId: String) {
