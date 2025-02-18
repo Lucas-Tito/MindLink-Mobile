@@ -122,8 +122,10 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
 
         for (availability in availabilities) {
             // Obtém todas as datas do ano para aquele dia da semana
+            println("dia da semana"+availability.dayOfWeek)
+            println(traduzirDiaParaIngles(availability.dayOfWeek))
             val formattedDates = getDatesForDayOfWeek(
-                availability.dayOfWeek,
+                traduzirDiaParaIngles(availability.dayOfWeek),
                 Calendar.getInstance().get(Calendar.YEAR)
             )
 
@@ -318,12 +320,12 @@ class PysichologistSchedulingActivity : AppCompatActivity() {
     fun traduzirDiaParaIngles(diaSemana: String): String {
         return when (diaSemana.lowercase()) {
             "domingo" -> "Sunday"
-            "Segunda-feira" -> "Monday"
-            "Terça-feira" -> "Tuesday"
-            "Quarta-feira" -> "Wednesday"
-            "Quinta-feira" -> "Thursday"
-            "Sexta-feira" -> "Friday"
-            "Sábado" -> "Saturday"
+            "segunda-feira" -> "Monday"
+            "terça-feira" -> "Tuesday"
+            "quarta-feira" -> "Wednesday"
+            "quinta-feira" -> "Thursday"
+            "sexta-feira" -> "Friday"
+            "sábado" -> "Saturday"
             else -> "${diaSemana}"
         }
     }
