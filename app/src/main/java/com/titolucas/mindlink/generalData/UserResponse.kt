@@ -15,7 +15,7 @@ data class UserResponse(
 )
 
 data class Appointment(
-    val appointmentId: String,
+    val appointmentId: String = "",
     val patientName: String,
     val patientId: String,
     val professionalName: String,
