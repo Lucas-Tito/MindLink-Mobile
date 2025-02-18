@@ -14,6 +14,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.UserResponse
+import com.titolucas.mindlink.login.view.LoginActivity
 import com.titolucas.mindlink.profile.repository.ProfileRepository
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
@@ -58,7 +59,8 @@ class PatientProfileFragment : Fragment() {
                 val bioText = view.findViewById<TextView>(R.id.bio_patient)
                 val emailText = view.findViewById<TextView>(R.id.contact_email)
                 val editProfileButton = view.findViewById<TextView>(R.id.tvEditarPerfil)
-
+                val logoutButton = view.findViewById<TextView>(R.id.btnLogoutPatient
+                )
                 profileName.text = user.name
                 emailText.text = user.email
                 bioText.text = user.bio ?: "Nenhuma bio disponível"
@@ -68,6 +70,13 @@ class PatientProfileFragment : Fragment() {
                 editProfileButton.setOnClickListener {
                     val intent = Intent(requireContext(), ProfileEditActivity::class.java)
                     startActivity(intent)
+                }
+
+                logoutButton.setOnClickListener {
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
 
             }

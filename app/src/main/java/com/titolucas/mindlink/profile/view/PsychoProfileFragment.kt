@@ -14,6 +14,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.UserResponse
+import com.titolucas.mindlink.login.view.LoginActivity
 import com.titolucas.mindlink.profile.repository.ProfileRepository
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
@@ -58,6 +59,7 @@ class PsychoProfileFragment : Fragment() {
                 val emailText = view.findViewById<TextView>(R.id.Email_text)
                 val educationText = view.findViewById<TextView>(R.id.education_text)
                 val editProfileButton = view.findViewById<TextView>(R.id.tvEditarPerfil)
+                val btnLogout = view.findViewById<TextView>(R.id.btnLogout)
 
                 educationText.text = user.education
                 profileName.text = user.name
@@ -70,6 +72,14 @@ class PsychoProfileFragment : Fragment() {
                     val intent = Intent(requireContext(), ProfileEditActivity::class.java)
                     startActivity(intent)
                 }
+
+                btnLogout.setOnClickListener {
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
+
 
             } else {
                 Toast.makeText(requireContext(), "Erro ao carregar o perfil do usuário", Toast.LENGTH_SHORT).show()
