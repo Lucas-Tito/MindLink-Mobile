@@ -33,7 +33,10 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
 
         val photoURL = intent.getStringExtra("photoURL")
+        val contactName = intent.getStringExtra("contactName")
         val contactImage = findViewById<ImageView>(R.id.contact_image)
+
+        findViewById<TextView>(R.id.nomeChat).text = contactName
 
         Glide.with(this)
             .load(photoURL)
@@ -80,7 +83,6 @@ class ChatActivity : AppCompatActivity() {
                     messages.sortBy { it.createdAt }
                     messagesAdapter.notifyDataSetChanged()
                     recyclerView.scrollToPosition(messages.size - 1)
-                    findViewById<TextView>(R.id.nomeChat).text = conversation.contactName
                 }
             } catch (e: Exception) {
                 Log.e("ChatActivity", "Erro ao recuperar mensagens: ${e.message}")

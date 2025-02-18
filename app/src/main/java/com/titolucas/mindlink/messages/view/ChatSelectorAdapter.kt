@@ -40,12 +40,13 @@
                 .placeholder(R.drawable.ic_profile) // Imagem de placeholder
                 .error(R.drawable.ic_profile) // Imagem de erro
                 .into(holder.photo)
-    
+
             holder.itemView.setOnClickListener {
                 val context = holder.itemView.context
                 val intent = Intent(context, ChatActivity::class.java).apply {
                     putExtra("contactId", chatList[position].contactUserId)
                     putExtra("photoURL", chatList[position].photoURL)
+                    putExtra("contactName", chatList[position].contactName) // Adiciona o nome do contato
                 }
                 context.startActivity(intent)
             }
