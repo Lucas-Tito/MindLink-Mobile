@@ -12,7 +12,6 @@ data class UserResponse(
     val education: String?= null,
     val bio: String?,
     val rating:Double? = null
-
 )
 
 data class Appointment(

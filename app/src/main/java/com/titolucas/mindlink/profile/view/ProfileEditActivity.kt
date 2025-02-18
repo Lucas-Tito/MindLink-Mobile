@@ -1,8 +1,10 @@
 package com.titolucas.mindlink.profile.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
+import com.titolucas.mindlink.MainActivity
 import com.titolucas.mindlink.R
 import com.titolucas.mindlink.generalData.UserResponse
 import com.titolucas.mindlink.profile.repository.ProfileRepository
@@ -57,16 +60,6 @@ class ProfileEditActivity : AppCompatActivity() {
         }
     }
 
-
-//simula a requisição pro back end
-    private fun simulateApiCall(user: UserResponse, callback: (Boolean) -> Unit) {
-        // Simula um atraso para imitar a latência da rede
-        Handler(Looper.getMainLooper()).postDelayed({
-            // Retorna um sucesso simulado
-            callback(true)
-        }, 2000) // 2 segundos de atraso
-    }
-
     //Editar psicologo
     private fun setupProfessionalViewEdit(user: UserResponse) {
 
@@ -83,6 +76,7 @@ class ProfileEditActivity : AppCompatActivity() {
         val inputEmail = findViewById<EditText>(R.id.inputEmail)
         val inputPassword = findViewById<EditText>(R.id.inputPassword)
         val btnSave = findViewById<Button>(R.id.btnSave)
+        val btnCancel = findViewById<Button>(R.id.btnCancel)
 
         // Preencher os valores
         inputName.setText(user.name)
@@ -97,30 +91,36 @@ class ProfileEditActivity : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             // Captura os dados dos campos
-            val updatedUser = UserResponse(
-                uid = user.uid,
-                professionalType = user.professionalType,
-                photoURL = user.photoURL, // Presume que a foto não foi alterada
-                name = inputName.text.toString(),
-                lastname = inputLastName.text.toString(),
-                title = inputTitle.text.toString(),
-                education = inputEducation.text.toString(),
-                bio = inputBio.text.toString(),
-                email = inputEmail.text.toString(),
-                password = inputPassword.text.toString()
-            )
 
-            // Exibe um Toast indicando que o envio está em andamento
-            Toast.makeText(this, "Salvando dados...", Toast.LENGTH_SHORT).show()
+            Log.d("ProfileEditActivity", "btnSave clicado. Preparando dados para atualizar o address.")
+            val updates = mutableMapOf<String, Any>()
 
-            // Simula o envio dos dados para o servidor
-            simulateApiCall(updatedUser) { success ->
-                if (success) {
-                    Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_LONG).show()
+            //insere no updates os dados que foram alterados
+            if (inputName.text.toString() != user.name) updates["name"] = inputName.text.toString()
+            if (inputLastName.text.toString() != user.lastname) updates["lastname"] = inputLastName.text.toString()
+            if (inputTitle.text.toString() != user.title) updates["title"] = inputTitle.text.toString()
+            if (inputEducation.text.toString() != user.education) updates["education"] = inputEducation.text.toString()
+            if (inputBio.text.toString() != user.bio) updates["bio"] = inputBio.text.toString()
+            if (inputEmail.text.toString() != user.email) updates["email"] = inputEmail.text.toString()
+            if (inputPassword.text.toString() != user.password) updates["password"] = inputPassword.text.toString()
+
+            viewModel.updateUser(user.uid, updates)
+
+            viewModel.updateResponse.observe(this) { response ->
+                if (response.message == "Usuário atualizado com sucesso") {
+                    Log.d("ProfileEditActivity", "Perfil atualizado com sucesso!")
+                    Toast.makeText(this, "Perfil atualizado com sucesso!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 } else {
-                    Toast.makeText(this, "Erro ao salvar os dados.", Toast.LENGTH_LONG).show()
+                    Log.d("ProfileEditActivity", "Falha ao atualizar o perfil: ${response.message}")
+                    Toast.makeText(this, "Falha ao atualizar perfil", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+        btnCancel.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
@@ -138,6 +138,7 @@ class ProfileEditActivity : AppCompatActivity() {
         val inputEmail = findViewById<EditText>(R.id.inputPatientEmail)
         val inputPassword = findViewById<EditText>(R.id.inputPatientPassword)
         val btnSave = findViewById<Button>(R.id.btnSavePatient)
+        val btnCancel = findViewById<Button>(R.id.btnCancelPatient)
 
         // Preencher os valores
         inputName.setText(user.name)
@@ -146,37 +147,37 @@ class ProfileEditActivity : AppCompatActivity() {
         inputEmail.setText(user.email)
         inputPassword.setText(user.password)
 
-
-
         //falta a Lógica para o botão de escolher foto no perfil
-
 
         btnSave.setOnClickListener {
             // Captura os dados dos campos
-            val updatedUser = UserResponse(
-                uid = user.uid,
-                education = user.education,
-                title = user.title,
-                professionalType = user.professionalType,
-                photoURL = user.photoURL, // Presume que a foto não foi alterada
-                name = inputName.text.toString(),
-                lastname = inputLastName.text.toString(),
-                bio = inputBio.text.toString(),
-                email = inputEmail.text.toString(),
-                password = inputPassword.text.toString()
-            )
+            Log.d("ProfileEditActivity", "btnSave clicado. Preparando dados para atualizar o address.")
+            val updates = mutableMapOf<String, Any>()
 
-            // Exibe um Toast indicando que o envio está em andamento
-            Toast.makeText(this, "Salvando dados...", Toast.LENGTH_SHORT).show()
+            //insere no updates os dados que foram alterados
+            if (inputName.text.toString() != user.name) updates["name"] = inputName.text.toString()
+            if (inputLastName.text.toString() != user.lastname) updates["lastname"] = inputLastName.text.toString()
+            if (inputBio.text.toString() != user.bio) updates["bio"] = inputBio.text.toString()
+            if (inputEmail.text.toString() != user.email) updates["email"] = inputEmail.text.toString()
+            if (inputPassword.text.toString() != user.password) updates["password"] = inputPassword.text.toString()
 
-            // Simula o envio dos dados para o servidor
-            simulateApiCall(updatedUser) { success ->
-                if (success) {
-                    Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_LONG).show()
+            viewModel.updateUser(user.uid, updates)
+
+            viewModel.updateResponse.observe(this) { response ->
+                if (response.message == "Usuário atualizado com sucesso") {
+                    Log.d("ProfileEditActivity", "Perfil atualizado com sucesso!")
+                    Toast.makeText(this, "Perfil atualizado com sucesso!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 } else {
-                    Toast.makeText(this, "Erro ao salvar os dados.", Toast.LENGTH_LONG).show()
+                    Log.d("ProfileEditActivity", "Falha ao atualizar o perfil: ${response.message}")
+                    Toast.makeText(this, "Falha ao atualizar perfil", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+        btnCancel.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

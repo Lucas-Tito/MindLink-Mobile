@@ -1,6 +1,7 @@
 package com.titolucas.mindlink.messages.view
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -119,33 +120,62 @@ class ChatActivity : AppCompatActivity() {
     private fun setupRealtimeUpdates(contactId: String?) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         messagesRef = FirebaseDatabase.getInstance().getReference("messages")
+        Log.d("ChatActivity", "MessagesRef: $messagesRef")
+
+
+        Log.d("ChatActivity", "Configuração de atualizações em tempo real iniciada para userId: $userId e contactId: $contactId")
 
         messagesRef.orderByChild("participants").equalTo(listOf(userId, contactId).toString())
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    Log.d("ChatActivity", "onChildAdded chamado")
                     val message = snapshot.getValue(MessageRequest::class.java)
                     if (message != null) {
+                        Log.d("ChatActivity", "Nova mensagem adicionada: ${message.text}")
                         messages.add(message)
                         messages.sortBy { it.createdAt }
                         messagesAdapter.notifyDataSetChanged()
                         recyclerView.scrollToPosition(messages.size - 1)
+                    } else {
+                        Log.d("ChatActivity", "Mensagem recebida é nula")
                     }
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                    // Implementar se necessário
+                    Log.d("ChatActivity", "onChildChanged chamado")
+                    val message = snapshot.getValue(MessageRequest::class.java)
+                    if (message != null) {
+                        Log.d("ChatActivity", "Mensagem alterada: ${message.text}")
+                        val index = messages.indexOfFirst { it.messageId == message.messageId }
+                        if (index != -1) {
+                            messages[index] = message
+                            messages.sortBy { it.createdAt }
+                            messagesAdapter.notifyDataSetChanged()
+                        }
+                    } else {
+                        Log.d("ChatActivity", "Mensagem alterada é nula")
+                    }
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
-                    // Implementar se necessário
+                    Log.d("ChatActivity", "onChildRemoved chamado")
+                    val message = snapshot.getValue(MessageRequest::class.java)
+                    if (message != null) {
+                        Log.d("ChatActivity", "Mensagem removida: ${message.text}")
+                        messages.removeAll { it.messageId == message.messageId }
+                        messagesAdapter.notifyDataSetChanged()
+                    } else {
+                        Log.d("ChatActivity", "Mensagem removida é nula")
+                    }
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                    Log.d("ChatActivity", "onChildMoved chamado")
                     // Implementar se necessário
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // Tratar erro
+                    Log.e("ChatActivity", "Erro ao configurar atualizações em tempo real: ${error.message}")
                 }
             })
     }

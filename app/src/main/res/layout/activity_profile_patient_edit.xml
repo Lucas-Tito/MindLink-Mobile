@@ -198,6 +198,14 @@
             android:layout_marginTop="24dp"
             android:backgroundTint="#3FAB98"
             android:textColor="@android:color/white" />
+        <!-- Botão Cancelar -->
+        <Button
+            android:id="@+id/btnCancelPatient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="#FF5E2F"
+            android:text="Cancel" />
 
     </LinearLayout>
 </ScrollView>
