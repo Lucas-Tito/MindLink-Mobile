@@ -1,32 +1,37 @@
 package com.titolucas.mindlink.register.view
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.titolucas.mindlink.R
+import com.titolucas.mindlink.login.view.LoginActivity
+import com.titolucas.mindlink.profile.view.ProfileEditActivity
 import com.titolucas.mindlink.register.data.RegisterResult
 import com.titolucas.mindlink.register.viewmodel.RegisterViewModel
 import com.titolucas.mindlink.register.viewmodel.RegisterViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
-
     private val viewModel: RegisterViewModel by viewModels { RegisterViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val nameField = findViewById<EditText>(R.id.editTextText)
-        val emailField = findViewById<EditText>(R.id.editTextTextEmailAddress)
-        val passwordField = findViewById<EditText>(R.id.editTextNumberPassword)
-        val registerButton = findViewById<Button>(R.id.button3)
+        val nameField = findViewById<EditText>(R.id.nomeRegistrarInput)
+        val emailField = findViewById<EditText>(R.id.emailRegistrarInput)
+        val passwordField = findViewById<EditText>(R.id.senhaRegistrarInput)
+        val registerButton = findViewById<Button>(R.id.buttonEnviarRegistrar)
+        val buttonVoltarLogin = findViewById<Button>(R.id.buttonVoltarLoginRegitrar)
 
         registerButton.setOnClickListener {
             val name = nameField.text.toString()
@@ -36,6 +41,10 @@ class RegisterActivity : AppCompatActivity() {
             if (validateInputs(name, email, password)) {
                 viewModel.register(name, email, password, null)
             }
+        }
+
+        buttonVoltarLogin.setOnClickListener {
+            finish()
         }
 
         observeViewModel()

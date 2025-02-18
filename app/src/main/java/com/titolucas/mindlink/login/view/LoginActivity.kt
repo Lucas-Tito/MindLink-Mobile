@@ -17,27 +17,28 @@ import com.titolucas.mindlink.login.data.LoginResult
 import com.titolucas.mindlink.login.viewmodel.LoginViewModel
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModel
 import com.titolucas.mindlink.login.viewmodel.LoginViewModelFactory
-import com.titolucas.mindlink.profile.view.ProfileActivity
-import com.titolucas.mindlink.search.view.SearchActivity
 import com.titolucas.mindlink.MainActivity
 import com.titolucas.mindlink.MainPsycho
 import com.titolucas.mindlink.profile.repository.ProfileRepository
 import com.titolucas.mindlink.profile.viewmodel.ProfileViewModelFactory
+import com.titolucas.mindlink.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var emailInput: EditText
     private lateinit var passwordInput: EditText
     private lateinit var loginButton: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var esqueceuButton : Button
+    private lateinit var signupButton : Button
+
 
     private val viewModel: LoginViewModel by viewModels {
         LoginViewModelFactory()
     }
-    private val profileViewModel: ProfileViewModel by viewModels{
+    private val profileViewModel: ProfileViewModel by
+    viewModels{
         ProfileViewModelFactory(ProfileRepository())
-
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,9 @@ class LoginActivity : AppCompatActivity() {
         emailInput = findViewById(R.id.editTextEmail)
         passwordInput = findViewById(R.id.editTextPassword)
         loginButton = findViewById(R.id.buttonLogin)
+        esqueceuButton = findViewById(R.id.buttonEsqueceuSenha)
         progressBar = findViewById(R.id.progressBar)
+        signupButton = findViewById(R.id.buttonSignUp)
 
         loginButton.setOnClickListener {
             val email = emailInput.text.toString().trim()
@@ -56,6 +59,16 @@ class LoginActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE
                 viewModel.login(email, password)
             }
+        }
+
+        esqueceuButton.setOnClickListener {
+            val intent = Intent(this, EsqueceuSenhaActivity::class.java)
+            startActivity(intent)
+        }
+
+        signupButton.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
         observeViewModel()
@@ -103,10 +116,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
 
     private fun validateInputs(email: String, password: String): Boolean {
         return when {
