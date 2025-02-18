@@ -134,13 +134,13 @@ class ConsultasPsychoFragment : Fragment() {
             val cardView = LayoutInflater.from(context).inflate(R.layout.item_appointment_card, consultasContainer, false)
 
             // Preenchendo os dados no card
-            cardView.findViewById<TextView>(R.id.nome_psico).text = consulta.professionalName
+            cardView.findViewById<TextView>(R.id.nome_psico).text = consulta.professionalName ?: "Nome não disponível"
             cardView.findViewById<TextView>(R.id.data_consulta).text = "${consulta.appointmentDate.day}/${consulta.appointmentDate.month}/${consulta.appointmentDate.year}"
             cardView.findViewById<TextView>(R.id.hora_consulta).text = "${consulta.appointmentDate.hour}:${consulta.appointmentDate.minutes}"
             val statusTextView = cardView.findViewById<TextView>(R.id.status_consulta)
-            statusTextView.text = consulta.status
+            statusTextView.text = consulta.status ?: "Status não disponível"
 
-            // Define a cor do status
+            // Verifica se o status não é nulo antes de definir a cor
             val backgroundDrawable = statusTextView.background as? GradientDrawable
             when (consulta.status) {
                 "Cancelada" -> backgroundDrawable?.setColor(resources.getColor(R.color.status_cancelado, null))
@@ -182,8 +182,20 @@ class ConsultasPsychoFragment : Fragment() {
             .setTitle("Escolha uma ação")
             .setItems(options.toTypedArray()) { _, which ->
                 when (options[which]) {
-                    "Aceitar Consulta" -> viewModel.updateAppointmentStatus(consulta.appointmentId, "Agendada")
-                    "Cancelar Consulta" -> viewModel.updateAppointmentStatus(consulta.appointmentId, "Cancelada")
+                    "Aceitar Consulta" -> {
+                        consulta.appointmentId?.let {
+                            viewModel.updateAppointmentStatus(it, "Agendada")
+                        } ?: run {
+                            Toast.makeText(requireContext(), "ID da consulta é nulo", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    "Cancelar Consulta" -> {
+                        consulta.appointmentId?.let {
+                            viewModel.updateAppointmentStatus(it, "Cancelada")
+                        } ?: run {
+                            Toast.makeText(requireContext(), "ID da consulta é nulo", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
             .show()
