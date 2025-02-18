@@ -18,7 +18,6 @@ import retrofit2.http.PATCH
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Body
-import retrofit2.http.PATCH
 
 interface ApiService {
 
