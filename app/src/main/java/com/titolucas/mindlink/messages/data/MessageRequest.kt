@@ -4,12 +4,12 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class MessageRequest(
-    val senderId: String,
-    val receiverId: String,
-    val text: String,
-    val participants: List<String>,
-    val messageId: String,
-    val createdAt: String
+    val senderId: String = "",
+    val receiverId: String = "",
+    val text: String = "",
+    val participants: List<String> = emptyList(),
+    val messageId: String = "",
+    val createdAt: Long = 0L // Agora está correto!
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -17,7 +17,7 @@ data class MessageRequest(
         parcel.readString() ?: "",
         parcel.createStringArrayList() ?: listOf(),
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
+        parcel.readLong() // Agora lendo como Long
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -26,7 +26,7 @@ data class MessageRequest(
         parcel.writeString(text)
         parcel.writeStringList(participants)
         parcel.writeString(messageId)
-        parcel.writeString(createdAt)
+        parcel.writeLong(createdAt) // Agora gravando como Long
     }
 
     override fun describeContents(): Int {
